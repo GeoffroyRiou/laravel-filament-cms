@@ -31,18 +31,18 @@ class CMSController extends Controller
         $defaultController = false;
 
         // On tente de récupérer un post
-        $post = Post::withoutGlobalScopes()->where('slug->'.app()->getLocale(), $slug)->first();
+        $post = Post::withoutGlobalScopes()->where('slug->' . app()->getLocale(), $slug)->first();
         if ($post) {
             // Initialisation avec le obn modèle. On fait une autre requète pour avoir les bonnes relations
-            $post = $post->model::where('slug->'.app()->getLocale(), $post->slug)->first();
+            $post = $post->model::where('slug->' . app()->getLocale(), $post->slug)->first();
             $defaultController = PostController::class;
 
             // Pas de post, on essaie pour les catégories
         } else {
-            $categorie = Categorie::withoutGlobalScopes()->where('slug->'.app()->getLocale(), $slug)->first();
+            $categorie = Categorie::withoutGlobalScopes()->where('slug->' . app()->getLocale(), $slug)->first();
             if ($categorie) {
                 // Initialisation avec le obn modèle. On fait une autre requète pour avoir les bonnes relations
-                $categorie = $categorie->model::where('slug->'.app()->getLocale(), $categorie->slug)->first();
+                $categorie = $categorie->model::where('slug->' . app()->getLocale(), $categorie->slug)->first();
                 $defaultController = CategorieController::class;
             }
         }
@@ -74,7 +74,6 @@ class CMSController extends Controller
      */
     public function home()
     {
-
         $accueil = Accueil::first();
         if (! $accueil) {
             return "La page d'accueil n'a pas été créée dans le panneau d'administration";
@@ -95,8 +94,8 @@ class CMSController extends Controller
 
         $modelNameParts = explode('\\', $modelName);
         $modelName = end($modelNameParts);
-        $controllerName = $modelName.'Controller';
-        $controllerNamespace = $this->controllersBaseNamespace.$controllerName;
+        $controllerName = $modelName . 'Controller';
+        $controllerNamespace = $this->controllersBaseNamespace . $controllerName;
 
         if (class_exists($controllerNamespace)) {
             return $controllerNamespace;
