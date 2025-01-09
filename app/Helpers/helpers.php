@@ -5,8 +5,6 @@ use App\Models\MediaLibraryFile;
 use App\Models\Menu;
 use App\Models\Post;
 use App\Models\Scopes\PostScope;
-use Illuminate\Filesystem\Filesystem;
-
 
 /**
  * Crée le html nécessaire pour appeler une icône svg disponible dans les assets
@@ -16,7 +14,7 @@ use Illuminate\Filesystem\Filesystem;
  */
 function svgIcon(string $name, ?string $cssclass = null): ?string
 {
-    if (!$name) {
+    if (! $name) {
         return null;
     }
 
@@ -35,9 +33,9 @@ function svgContent(string $svgName): string
         return '';
     }
 
-    $svgPath = public_path('images/svgs/' . $svgName . '.svg');
+    $svgPath = public_path('images/svgs/'.$svgName.'.svg');
 
-    if (!file_exists($svgPath)) {
+    if (! file_exists($svgPath)) {
         return '';
     }
 
@@ -54,7 +52,7 @@ function getMenu(int $menuId): array
     $menu = Menu::find($menuId);
 
     $liens = [];
-    if (!empty($menu->liens)) {
+    if (! empty($menu->liens)) {
         foreach ($menu->liens as $lienMenu) {
             switch ($lienMenu['type']) {
                 case 'page':
@@ -95,7 +93,7 @@ function getAllEnumValues(array $enumValues, bool $valuesAsKeys = true): array
     $roles = [];
 
     foreach ($enumValues as $key => $case) {
-        $roles[$valuesAsKeys ? $case->value : $key] = __('admin.' . $case->value);
+        $roles[$valuesAsKeys ? $case->value : $key] = __('admin.'.$case->value);
     }
 
     return $roles;
@@ -110,7 +108,7 @@ function getPost(int $postId): ?Post
     // Récupération du post sans distinction de son type
     $post = Post::withoutGlobalScope(PostScope::class)->find($postId);
 
-    if (!$post) {
+    if (! $post) {
         return null;
     }
 
@@ -129,7 +127,7 @@ function getCategorie(int $categId): ?Post
     // Récupération du post sans distinction de son type
     $post = Categorie::withoutGlobalScope(PostScope::class)->find($categId);
 
-    if (!$post) {
+    if (! $post) {
         return null;
     }
 
@@ -147,7 +145,7 @@ function getPostUrl(int $postId): ?string
 
     $model = getPost($postId);
 
-    if (!$model) {
+    if (! $model) {
         return null;
     }
 
@@ -164,24 +162,23 @@ function getMediaFileUrl(MediaLibraryFile|int $media, string $size = 'thumbnail'
 
     $media = $media instanceof MediaLibraryFile ? $media : MediaLibraryFile::find($media);
 
-    if (!$media) {
+    if (! $media) {
         return null;
     }
 
     return $media->getFirstMedia('*')->getUrl($media->isImage() ? $size : null);
 }
 
-
 /**
  * Cherche un fichier de vue en se basant sur un slug
  * Utilisé pour rechercher de manière automatique une vue pour un post
  */
-function getViewNameFromSlug(string $search, string $path = null) : string | null
+function getViewNameFromSlug(string $search, ?string $path = null): ?string
 {
     $viewsPath = resource_path('views');
     $path = $path ?? $viewsPath;
 
-    $filesystem = new \Illuminate\Filesystem\Filesystem();
+    $filesystem = new \Illuminate\Filesystem\Filesystem;
 
     $directories = $filesystem->directories($path);
     $files = $filesystem->files($path);
@@ -189,13 +186,15 @@ function getViewNameFromSlug(string $search, string $path = null) : string | nul
     foreach ($files as $file) {
         if (strpos($file->getFilename(), $search) !== false) {
             // Extraction du nom de la vue avec sont arbo à partir du dossier views
-            return trim(str_replace([$viewsPath,'.blade.php'],'', $file->getPathname()), '/');
+            return trim(str_replace([$viewsPath, '.blade.php'], '', $file->getPathname()), '/');
         }
     }
 
     foreach ($directories as $directory) {
         $result = getViewNameFromSlug($search, $directory);
-        if ($result) return $result;
+        if ($result) {
+            return $result;
+        }
     }
 
     return null;

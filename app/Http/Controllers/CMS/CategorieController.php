@@ -8,7 +8,8 @@ class CategorieController
 {
     protected string $view = 'categories.categorie';
 
-    public function show($categorie): View{
+    public function show($categorie): View
+    {
         $view = getViewNameFromSlug($categorie->slug) ?? $this->view;
 
         return view($view, array_merge(

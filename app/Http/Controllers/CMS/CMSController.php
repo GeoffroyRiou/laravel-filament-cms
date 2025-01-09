@@ -17,7 +17,7 @@ class CMSController extends Controller
      * Sinon , controller par défaut
      * Si pas de post ni de catégorie, 404
      *
-     * @param string|null $modelName The name of the model.
+     * @param  string|null  $modelName  The name of the model.
      * @return string|null The controller name if found, otherwise null.
      */
     public function __invoke(string $path)
@@ -31,35 +31,36 @@ class CMSController extends Controller
         $defaultController = false;
 
         // On tente de récupérer un post
-        $post = Post::withoutGlobalScopes()->where('slug->' . app()->getLocale(), $slug)->first();
+        $post = Post::withoutGlobalScopes()->where('slug->'.app()->getLocale(), $slug)->first();
         if ($post) {
             // Initialisation avec le obn modèle. On fait une autre requète pour avoir les bonnes relations
-            $post = $post->model::where('slug->' . app()->getLocale(), $post->slug)->first();
+            $post = $post->model::where('slug->'.app()->getLocale(), $post->slug)->first();
             $defaultController = PostController::class;
 
-        // Pas de post, on essaie pour les catégories
+            // Pas de post, on essaie pour les catégories
         } else {
-            $categorie = Categorie::withoutGlobalScopes()->where('slug->' . app()->getLocale(), $slug)->first();
+            $categorie = Categorie::withoutGlobalScopes()->where('slug->'.app()->getLocale(), $slug)->first();
             if ($categorie) {
                 // Initialisation avec le obn modèle. On fait une autre requète pour avoir les bonnes relations
-                $categorie = $categorie->model::where('slug->' . app()->getLocale(), $categorie->slug)->first();
+                $categorie = $categorie->model::where('slug->'.app()->getLocale(), $categorie->slug)->first();
                 $defaultController = CategorieController::class;
             }
         }
 
         $cmsContent = $post ?? $categorie ?? null;
-        
+
         // On tente de trouver un controller
         $inferedControllerName = $this->getControllerNameFromModel($cmsContent->model ?? null);
-        $controllerClass = $inferedControllerName  ? $inferedControllerName : $defaultController;
-        
+        $controllerClass = $inferedControllerName ? $inferedControllerName : $defaultController;
+
         // Controller trouvé, on appelle la méthode d'affichage
         if ($cmsContent && $controllerClass) {
-            $finalController =  new $controllerClass;
-            return  $finalController->show($cmsContent);
-        
-        // Controller non trouvé on crash car c'est un cas non autorisé
-        } elseif ($cmsContent && !$controllerClass) {
+            $finalController = new $controllerClass;
+
+            return $finalController->show($cmsContent);
+
+            // Controller non trouvé on crash car c'est un cas non autorisé
+        } elseif ($cmsContent && ! $controllerClass) {
             throw new \Exception("Pas de controller trouvé pour le slug $slug", 1);
         }
 
@@ -71,10 +72,11 @@ class CMSController extends Controller
      * Cas spécial pour la home
      * Au final même mécanique d'appel de controller
      */
-    public function home(){
+    public function home()
+    {
 
         $accueil = Accueil::first();
-        if(!$accueil){
+        if (! $accueil) {
             return "La page d'accueil n'a pas été créée dans le panneau d'administration";
         }
 
@@ -84,15 +86,17 @@ class CMSController extends Controller
     /**
      * Récupère le chemin du controller à partir du nom du modèle
      */
-    private function getControllerNameFromModel(?string $modelName): string | null
+    private function getControllerNameFromModel(?string $modelName): ?string
     {
 
-        if (!$modelName) return null;
+        if (! $modelName) {
+            return null;
+        }
 
         $modelNameParts = explode('\\', $modelName);
         $modelName = end($modelNameParts);
-        $controllerName = $modelName . 'Controller';
-        $controllerNamespace = $this->controllersBaseNamespace . $controllerName;
+        $controllerName = $modelName.'Controller';
+        $controllerNamespace = $this->controllersBaseNamespace.$controllerName;
 
         if (class_exists($controllerNamespace)) {
             return $controllerNamespace;

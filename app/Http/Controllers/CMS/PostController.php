@@ -8,7 +8,8 @@ class PostController
 {
     protected string $view = 'pages.article';
 
-    public function show($post): View{
+    public function show($post): View
+    {
         $view = getViewNameFromSlug($post->slug) ?? $this->view;
 
         return view($view, array_merge(

@@ -26,7 +26,8 @@ class AdminPanelProvider extends PanelProvider
 {
     public function panel(Panel $panel): Panel
     {
-        $pageAccueil = Accueil::first();
+        $pageAccueil = app()->runningInConsole() ? null : Accueil::first();
+
         return $panel
             ->default()
             ->id('admin')
@@ -70,9 +71,9 @@ class AdminPanelProvider extends PanelProvider
             ->navigationGroups([
 
                 NavigationGroup::make()
-                 ->label('Articles')
-                 ->icon('heroicon-o-pencil')
-                 ->collapsed(),
+                    ->label('Articles')
+                    ->icon('heroicon-o-pencil')
+                    ->collapsed(),
 
                 NavigationGroup::make()
                     ->label('Pages')
@@ -106,7 +107,7 @@ class AdminPanelProvider extends PanelProvider
                     ->icon('heroicon-o-globe-europe-africa')
                     ->sort(-3),
                 NavigationItem::make('Page d\'accueil')
-                    ->url( $pageAccueil ? '/admin/accueils/'.$pageAccueil->id.'/edit' : '/admin/accueils/create') // La génération de l'url à partir de la resource ne fonctionne pas->url('/admin/accueils/1/edit') // La génération de l'url à partir de la resource ne fonctionne pas
+                    ->url($pageAccueil ? '/admin/accueils/'.$pageAccueil->id.'/edit' : '/admin/accueils/create') // La génération de l'url à partir de la resource ne fonctionne pas->url('/admin/accueils/1/edit') // La génération de l'url à partir de la resource ne fonctionne pas
                     ->group('Pages'),
             ])
             ->sidebarCollapsibleOnDesktop();

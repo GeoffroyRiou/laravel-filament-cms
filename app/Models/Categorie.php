@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-#[ScopedBy([new CategorieScope()])]
+#[ScopedBy([new CategorieScope])]
 class Categorie extends Model
 {
+    use HasCMSFields;
     use HasFactory;
     use HasTranslations;
-    use HasCMSFields;
 
     public $table = 'categories';
 
@@ -104,7 +104,7 @@ class Categorie extends Model
         }
 
         return route('cms', [
-            'cmsPath' => $path . '/' .$this->slug,
+            'cmsPath' => $path.'/'.$this->slug,
         ]).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
     }
 

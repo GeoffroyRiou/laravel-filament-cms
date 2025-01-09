@@ -12,14 +12,15 @@ use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use Spatie\Translatable\HasTranslations;
 
-#[ScopedBy([new PostScope()])]
+#[ScopedBy([new PostScope])]
 class Post extends Model
 {
+    use HasCMSFields;
     use HasSEO;
     use HasTranslations;
-    use HasCMSFields;
 
     public $table = 'posts';
+
     protected $categorieModel = Categorie::class;
 
     protected $fillable = [
@@ -103,7 +104,6 @@ class Post extends Model
         // Prise en compte de la locale admin ou front
         $locale = $this->translationLocale ?? app()->getLocale();
 
-
         $path = '';
         if (count($this->categories)) {
 
@@ -119,7 +119,7 @@ class Post extends Model
         }
 
         return route('cms', [
-            'cmsPath' => $path . '/' .$this->slug,
+            'cmsPath' => $path.'/'.$this->slug,
         ]).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
     }
 

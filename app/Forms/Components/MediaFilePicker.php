@@ -32,7 +32,7 @@ class MediaFilePicker extends Field
     {
         $medias = MediaLibraryFile::all();
 
-        $mediasCollection = new Collection();
+        $mediasCollection = new Collection;
         /**
          * TODO : A améliorer en mettant la condition directement dans la query
          */

@@ -22,8 +22,8 @@ class PageResource extends PostResource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(self::getCmsFormSchema(hasTags: false, hasIllustration: false, customFields:[
-                TextInput::make('customDemo')
+            ->schema(self::getCmsFormSchema(hasTags: false, hasIllustration: false, customFields: [
+                TextInput::make('customDemo'),
             ]));
     }
 

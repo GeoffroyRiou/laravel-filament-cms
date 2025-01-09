@@ -23,7 +23,7 @@ class FrontCms extends Component
     {
         foreach ($contenu as $block) {
 
-            $currentBlock = new \stdClass();
+            $currentBlock = new \stdClass;
 
             switch ($block['type']) {
                 case 'titre':
