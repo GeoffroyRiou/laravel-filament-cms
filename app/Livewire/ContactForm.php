@@ -68,7 +68,7 @@ class ContactForm extends Component
                 $currentRules[] = 'required';
             }
             if (!empty($champ['data']['mask'])) {
-                $currentRules[] = 'regex:/^'.$champ['data']['mask'].'$/i';
+                $currentRules[] = 'regex:/^' . $champ['data']['mask'] . '$/i';
             }
 
             switch ($champ['type']) {
@@ -79,10 +79,21 @@ class ContactForm extends Component
                     }
                     break;
             }
-            $rules['formData.'.$champ['data']['slug']] = $currentRules;
+            $rules['formData.' . $champ['data']['slug']] = $currentRules;
         }
 
         return $rules;
+    }
+
+    protected function validationAttributes()
+    {
+        $fieldNames = [];
+
+        foreach ($this->form->champs as $champ) {
+            $fieldNames['formData.' . $champ['data']['slug']] = $champ['data']['label'] ?? $champ['data']['slug'];
+        }
+
+        return $fieldNames;
     }
 
     public function send(): void
@@ -105,12 +116,12 @@ class ContactForm extends Component
         // Envoi du mail
         if (
             Mail::to(explode(',', $this->form->destinataires))
-                ->send(
-                    new ContactFormMail(
-                        $this->form->sujet ?? '',
-                        $formattedData
-                    )
+            ->send(
+                new ContactFormMail(
+                    $this->form->sujet ?? '',
+                    $formattedData
                 )
+            )
         ) {
             $this->formSent = true;
 
