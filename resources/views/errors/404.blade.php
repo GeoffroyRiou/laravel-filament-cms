@@ -1,5 +1,9 @@
 @extends('layouts.main')
 
 @section('content')
-    <h1>404</h1>
+    <div>
+        <p>404</p>
+        <p>Cette page n'existe pas ou a été déplacée.</p>
+        <a href="{{route('home')}}">Acceuil</a>
+    </div>
 @stop

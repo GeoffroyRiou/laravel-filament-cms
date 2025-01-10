@@ -2,7 +2,7 @@
 
 @if(!empty($breadcrumbData))
     <nav>
-        <ul class="flex gap-2">
+        <ul>
             <li>
                 <a href="{{route('home')}}">Accueil</a>
             </li>

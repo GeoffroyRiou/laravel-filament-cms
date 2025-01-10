@@ -21,8 +21,6 @@ return new class extends Migration
             $table->string('adresse')->nullable();
             $table->string('email')->nullable();
             $table->string('gtag')->nullable();
-            $table->string('matomoSiteId')->nullable();
-            $table->string('matomoServerUrl')->nullable();
             $table->timestamps();
         });
     }

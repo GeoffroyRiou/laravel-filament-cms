@@ -1,6 +1,7 @@
 <?php
 
 use App\Enums\PostsStatus;
+use App\Models\Categorie;
 use App\Models\MediaLibraryFile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -19,15 +20,13 @@ return new class extends Migration
             $table->string('titre');
             $table->string('slug');
             $table->string('model');
-            $table->enum('statut', array_map(fn ($case) => $case->value, PostsStatus::cases()));
-            $table->foreignIdFor(MediaLibraryFile::class)->nullable();
+            $table->enum('statut', array_map(fn($case) => $case->value, PostsStatus::cases()));
+            $table->foreignId('media_library_file_id')->nullable();
             $table->json('contenu')->nullable();
             $table->json('custom')->nullable();
             $table->integer('order')->default(0);
-            $table->unsignedBigInteger('categorie_id')->nullable();
+            $table->foreignId('categorie_id')->nullable();
             $table->timestamps();
-
-            $table->foreign('categorie_id')->references('id')->on('categories')->onDelete('cascade');
         });
     }
 

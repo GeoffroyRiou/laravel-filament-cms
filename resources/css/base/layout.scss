@@ -1,0 +1,31 @@
+::-webkit-scrollbar {
+    @apply 
+    w-3 
+    h-3
+    bg-white;
+}
+
+::-webkit-scrollbar-track {
+    @apply 
+    bg-white
+    border
+    rounded-lg;
+}
+
+::-webkit-scrollbar-thumb {
+    @apply 
+    bg-black 
+    rounded-xl;
+}
+
+::selection {
+    @apply 
+    bg-sky-500
+    text-black;
+}
+
+body{
+    @apply
+    text-black
+    font-americane;
+}

@@ -48,7 +48,7 @@ const initRGPD = () => {
                             },
                             {
                                 title: 'Plus d\'informations',
-                                description: 'Pour toute question relative à la politique en matière de cookies et à vos choix, veuillez <a href="#contact-page">nous contacter</a>'
+                                description: 'Pour toute question relative à la politique en matière de cookies et à vos choix, veuillez <a href="/pages/contact">nous contacter</a>'
                             }
                         ]
                     }

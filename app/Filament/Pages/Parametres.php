@@ -57,8 +57,7 @@ class Parametres extends Page implements HasForms
                 Section::make('Analytics')
                     ->schema([
                         TextInput::make('gtag')->label('Code GA'),
-                        TextInput::make('matomoSiteId')->label('ID du site Matomo'),
-                        TextInput::make('matomoServerUrl')->label('Adresse du serveur Matomo')->helperText('Sans le protocole. ex : matomo.example.cloud'),
+                        TextInput::make('matomo')->label('ID du site Matomo'),
                     ]),
             ])
             ->statePath('data');

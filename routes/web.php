@@ -1,13 +1,18 @@
 <?php
 
-use App\Http\Controllers\CMS\CMSController;
+use App\Http\Controllers\CMS\HomeController;
 use App\Http\Controllers\LanguageSwitcher;
 use Illuminate\Support\Facades\Route;
+
+Route::get('/', HomeController::class)->name('home');
 
 Route::post('/language', LanguageSwitcher::class)->name('language.switch');
 
 /**
  * Création des routes  CMS
  */
-Route::get('/', [CMSController::class, 'home'])->name('home');
-Route::get('/{cmsPath}', CMSController::class)->name('cms')->where('cmsPath', '.*');
+
+foreach (getCmsControllersClasses() as $controller) {
+    Route::get("/{$controller::$model::$routeSlug}s/{slug}", [$controller, 'single'])->name("{$controller::$model::$routeSlug}.single");
+    Route::get("/{$controller::$model::$routeSlug}s/{parents}/{slug}", [$controller, 'singleHierarchical'])->name("{$controller::$model::$routeSlug}.single.hierarchical")->where('parents', '.*');
+}

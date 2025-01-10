@@ -17,7 +17,6 @@ class Settings extends Model
         'adresse',
         'email',
         'gtag',
-        'matomoSiteId',
-        'matomoServerUrl',
+        'matomo',
     ];
 }

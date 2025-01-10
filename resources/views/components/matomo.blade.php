@@ -1,11 +1,6 @@
-@php
+@php($matomo = $settings->matomo ?? null)
 
-$matomoSiteId = $settings->matomoSiteId ?? '';
-$matomoServerUrl = $settings->matomoServerUrl ?? '';
-
-@endphp
-
-@if (!empty($matomoSiteId) && !empty($matomoServerUrl))
+@if (!empty($matomo))
     <!-- Matomo -->
     <script>
         var _paq = window._paq = window._paq || [];
@@ -14,14 +9,14 @@ $matomoServerUrl = $settings->matomoServerUrl ?? '';
         _paq.push(['enableLinkTracking']);
         _paq.push(['requireCookieConsent']);
         (function() {
-            var u = "https://{{$matomoServerUrl}}/";
+            var u = "https://XXX.matomo.cloud/";
             _paq.push(['setTrackerUrl', u + 'matomo.php']);
-            _paq.push(['setSiteId', '{{$matomoSiteId}}']);
+            _paq.push(['setSiteId', '1']);
             var d = document,
                 g = d.createElement('script'),
                 s = d.getElementsByTagName('script')[0];
             g.async = true;
-            g.src = 'https://cdn.matomo.cloud/{{$matomoServerUrl}}/matomo.js';
+            g.src = 'https://cdn.matomo.cloud/XXXX.matomo.cloud/matomo.js';
             s.parentNode.insertBefore(g, s);
         })();
     </script>

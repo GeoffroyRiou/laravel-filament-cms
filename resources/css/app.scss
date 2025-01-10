@@ -3,3 +3,9 @@
 @tailwind utilities;
 
 @import 'vanilla-cookieconsent/dist/cookieconsent.css';
+
+@import 'base/fonts.scss';
+@import 'base/helpers.scss';
+@import 'base/layout.scss';
+
+@import 'components/cms.scss';

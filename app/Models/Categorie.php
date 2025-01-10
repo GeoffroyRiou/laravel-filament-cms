@@ -9,16 +9,17 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
 
-#[ScopedBy([new CategorieScope])]
+#[ScopedBy([new CategorieScope()])]
 class Categorie extends Model
 {
-    use HasCMSFields;
     use HasFactory;
     use HasTranslations;
+    use HasCMSFields;
 
     public $table = 'categories';
 
     protected $postModel = Post::class;
+    public static string $routeSlug = 'categorie';
 
     protected $fillable = [
         'nom',
@@ -88,7 +89,10 @@ class Categorie extends Model
 
         $locale = $this->translationLocale ?? app()->getLocale();
 
-        $path = '';
+        $params = [
+            'slug' => $this->slug,
+        ];
+        $routeStr = static::$routeSlug.'.single';
 
         if ($this->parent) {
 
@@ -99,13 +103,12 @@ class Categorie extends Model
                 $parentsPath = "{$currentParent->getTranslation('slug', $locale)}/".$parentsPath;
                 $currentParent = $currentParent->parent;
             }
-            $path .= trim($parentsPath, '/');
+
             $params['parents'] = trim($parentsPath, '/');
+            $routeStr .= '.hierarchical';
         }
 
-        return route('cms', [
-            'cmsPath' => $path.'/'.$this->slug,
-        ]).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
+        return route($routeStr, $params).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
     }
 
     /**

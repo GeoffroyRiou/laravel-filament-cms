@@ -2,7 +2,10 @@
 
 namespace App\Providers;
 
+use App\Models\Expertise;
 use App\Models\Settings;
+use Barryvdh\Debugbar\Facades\Debugbar;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
@@ -21,10 +24,15 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        if (app()->runningInConsole()) {
-            return;
+        if (!$this->app->environment('local')) {
+            URL::forceScheme('https');
         }
-
-        View::share('settings', Settings::first());
+        
+        Debugbar::disable();
+        try {
+            View::share('settings', Settings::first());
+            View::share('expertises', Expertise::published()->orderby('order', 'asc')->get());
+        } catch (\Exception $e) {
+        }
     }
 }

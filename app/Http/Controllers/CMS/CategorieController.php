@@ -2,27 +2,42 @@
 
 namespace App\Http\Controllers\CMS;
 
+use App\Http\Controllers\Controller;
+use App\Models\Categorie;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\View\View;
 
-class CategorieController
+class CategorieController extends Controller
 {
+    public static string $model = Categorie::class;
     protected string $view = 'categories.categorie';
 
-    public function show($categorie): View
+    public function single(string $slug): View
     {
-        $view = getViewNameFromSlug($categorie->slug) ?? $this->view;
+        return $this->getCategoriePage($slug);
+    }
 
-        return view($view, array_merge(
-            compact('categorie'),
-            $this->getOtherViewData()
-        ));
+    public function singleHierarchical(string $parents, string $slug): View
+    {
+        return $this->getCategoriePage($slug);
     }
 
     /**
-     * Permet d'injecter des données supplémentaires à la vue
+     * Récupère le Categorie et retourne sa vue
      */
-    protected function getOtherViewData(): array
+    private function getCategoriePage(string $slug): View
     {
-        return [];
+        $categorie = $this->getCategorie(static::$model, $slug);
+
+        return view($this->view, compact('categorie'));
+    }
+
+    /**
+     * Récupère une catégorie à partir de sa classe et de son slug
+     * Si pas de contenu pour la langue courante, redirection en home
+     */
+    protected function getCategorie(string $classPath, string $slug): Categorie|RedirectResponse
+    {
+        return $classPath::where('model', $classPath)->where('slug->'.app()->getLocale(), $slug)->firstOrFail();
     }
 }

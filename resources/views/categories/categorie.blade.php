@@ -3,14 +3,14 @@
 ])
 
 @section('content')
-<div class="text-slate-50 bg-slate-600 p-2">
-    <x-front-breadcrumb :breadcrumbData="$categorie->getBreadcrumb()" />
-</div>
+    <div class="text-slate-50 bg-slate-600 p-2">
+        <x-front-breadcrumb :breadcrumbData="$categorie->getBreadcrumb()" />
+    </div>
     <div class="max-w-[1000px] mx-auto border rounded-xl p-5 my-20">
         <h1 class="text-3xl pb-10">{{ $categorie->nom ?? '' }}</h1>
 
-        @if($auteur = $categorie->field('auteur'))
-            <h2>Auteur : {{$auteur}}</h2>
+        @if ($auteur = $categorie->field('auteur'))
+            <h2>Auteur : {{ $auteur }}</h2>
         @endif
 
         <h2 class="text-2xl pb-2">Sous catégories</h2>

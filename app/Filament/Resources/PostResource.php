@@ -118,27 +118,27 @@ class PostResource extends Resource
                 (
                     $hasBuilder ?
                     Section::make('Contenu de la page')
-                        ->schema([
-                            CMSField::make('contenu')
-                                ->columnSpan(2),
-                        ]) :
+                    ->schema([
+                        CMSField::make('contenu')
+                            ->columnSpan(2),
+                    ]) :
                     Hidden::make('ignoredBuilder')
                 ),
 
                 // Contenu avec blocs additionnels
                 (
-                    ! empty($customFields) ?
+                    !empty($customFields) ?
                     Section::make('Contenu additionnel')
-                        ->schema([
-                            Repeater::make('custom') // Utilisation d'un repeater pour stocker la totalité des données dans une seule colonne de base
-                                ->label('')
-                                ->schema($customFields)
-                                ->defaultItems(1)
-                                ->deletable(false)
-                                ->reorderable(false)
-                                ->addable(false)
-                                ->columnSpan(2),
-                        ])
+                    ->schema([
+                        Repeater::make('custom') // Utilisation d'un repeater pour stocker la totalité des données dans une seule colonne de base
+                            ->label('')
+                            ->schema($customFields)
+                            ->defaultItems(1)
+                            ->deletable(false)
+                            ->reorderable(false)
+                            ->addable(false)
+                            ->columnSpan(2),
+                    ])
                     : Hidden::make('ignoredField') // Hack car il faut absolument un champ retourné. Ne sera pas pris en compte à l'enregistrement car pas fillable
                 ),
 

@@ -23,7 +23,7 @@ class FrontCms extends Component
     {
         foreach ($contenu as $block) {
 
-            $currentBlock = new \stdClass;
+            $currentBlock = new \stdClass();
 
             switch ($block['type']) {
                 case 'titre':
@@ -41,6 +41,53 @@ class FrontCms extends Component
                         $currentBlock->type = $block['type'];
                         $currentBlock->media = $mediaFile;
                     }
+
+                    break;
+
+                case "colored_block":
+                    
+                    $currentBlock->type = $block['type'];
+                    $mediaFile = MediaLibraryFile::find($block['data']['file']);
+
+                    if ($mediaFile && ! empty($mediaFile->getFirstMedia('*'))) {
+                        $currentBlock->media = $mediaFile;
+                    }
+                    $currentBlock->titre = $block['data']['titre'] ?? '';
+                    $currentBlock->contenu = $block['data']['contenu'] ?? '';
+                    $currentBlock->reverse = $block['data']['reverse'] ?? false;
+                    $currentBlock->texte_large = $block['data']['texte_large'] ?? false;
+                    $currentBlock->couleur = $block['data']['couleur'] ?? 'jaune';
+
+                    break;
+
+                case "team":
+                    
+                    $currentBlock->type = $block['type'];
+                    $currentBlock->images = [];
+
+                    foreach($block['data']['teamImages'] as $image){
+                        $imageObj = new \stdClass();
+
+                        $mediaFile = MediaLibraryFile::find($image['file']);
+
+                        if ($mediaFile && ! empty($mediaFile->getFirstMedia('*'))) {
+                            $imageObj->media = $mediaFile;
+                        }
+                        $imageObj->nom = $image['nom'];
+                        $imageObj->poste = $image['poste'];
+
+                        $currentBlock->images[] = $imageObj;
+                    }
+
+                    break;
+
+                case "impact":
+                    
+                    $currentBlock->type = $block['type'];
+                    $currentBlock->titre = $block['data']['titre'] ?? '';
+                    $currentBlock->contenu = $block['data']['contenu'] ?? '';
+                    $currentBlock->baseline = $block['data']['baseline'] ?? '';
+                    $currentBlock->couleur = $block['data']['couleur'] ?? 'jaune';
 
                     break;
 

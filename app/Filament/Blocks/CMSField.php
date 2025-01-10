@@ -4,13 +4,25 @@ namespace App\Filament\Blocks;
 
 use App\Forms\Components\MediaFileField;
 use Filament\Forms\Components\Builder;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 
 class CMSField extends Builder
 {
+    /**
+     * Configure le schéma du formulaire pour le CMSField.
+     *
+     * Cette méthode initialise le schéma du formulaire en ajoutant divers composants
+     * tels que des champs de texte, des champs de sélection, un éditeur enrichi, des
+     * interrupteurs de basculement et des répétiteurs. Le schéma est défini en utilisant
+     * la classe Builder\Block et ses composants de schéma correspondants.
+     *
+     * @return void
+     */
     protected function setUp(): void
     {
         parent::setUp();
@@ -35,7 +47,19 @@ class CMSField extends Builder
                     ->schema([
                         RichEditor::make('contenu')
                             ->label('Contenu')
-                            ->required(),
+                            ->required()
+                            ->toolbarButtons([
+                                'blockquote',
+                                'bold',
+                                'bulletList',
+                                'h2',
+                                'h3',
+                                'italic',
+                                'link',
+                                'orderedList',
+                                'strike',
+                                'underline',
+                            ]),
                     ]),
                 Builder\Block::make('paragraphe')
                     ->label('Paragraphe')
@@ -44,25 +68,13 @@ class CMSField extends Builder
                             ->label('Contenu')
                             ->required(),
                     ]),
+
+                
                 Builder\Block::make('formulaire')
                     ->label('Formulaire de contact')
                     ->schema([
                         ContactFormSelect::make('contenu')
                             ->label('')
-                            ->required(),
-                    ]),
-                Builder\Block::make('image')
-                    ->schema([
-                        MediaFileField::make('file')
-                            ->label('Image')
-                            ->imagesOnly(true)
-                            ->required(),
-                    ]),
-                Builder\Block::make('fichier')
-                    ->schema([
-                        MediaFileField::make('file')
-                            ->label('Fichier')
-                            ->filesOnly(true)
                             ->required(),
                     ]),
             ]);

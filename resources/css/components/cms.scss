@@ -1,0 +1,110 @@
+.cms-content{
+    @apply
+    flex
+    flex-col
+    gap-2;
+
+    h2, h3, h4{
+        @apply
+        font-bold
+        uppercase;
+    }
+
+    h2{
+        @apply
+        text-3xl;
+    }
+
+    h3{
+        @apply
+        text-2xl;
+    }
+
+    h4{
+        @apply
+        text-xl;
+    }
+
+    ul{
+        @apply
+        flex
+        flex-col
+        gap-1;
+    }
+
+    li{
+        @apply
+        list-outside
+        ml-5
+        list-disc;
+
+        &::marker{
+            @apply
+            text-slate-400
+            text-sm;
+        }
+    }
+
+    ol > li{
+        @apply
+        list-outside
+        ml-3
+        pl-2
+        list-decimal;
+
+        &::marker{
+            @apply
+            text-slate-400
+            text-sm;
+        }
+    }
+
+    a{
+        @apply
+        text-sky-500
+        transition-colors
+        duration-300;
+
+        &:hover{
+            @apply
+            xl:text-sky-500;
+        }
+    }
+
+    blockquote{
+        @apply
+        bg-sky-500
+        text-black
+        p-5
+        border-l-4
+        border-black
+        text-xl;
+
+        @apply
+        lg:text-2xl;
+    }
+}
+
+.cms-default{
+    @extend .cms-content;
+
+    @apply
+    my-2
+    text-lg;
+
+    &:first-child{
+        @apply
+        pt-8;
+
+        @apply
+        lg:pt-24;
+    }
+
+    &:last-child{
+        @apply
+        pb-8;
+
+        @apply
+        lg:pb-24;
+    }
+}

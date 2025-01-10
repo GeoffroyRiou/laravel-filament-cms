@@ -62,21 +62,24 @@ class ContactForm extends Component
     {
         $rules = [];
         foreach ($this->form->champs as $champ) {
-            $ruleStr = '';
+            $currentRules = [];
 
             if ($champ['data']['requis']) {
-                $ruleStr = 'required';
+                $currentRules[] = 'required';
+            }
+            if (!empty($champ['data']['mask'])) {
+                $currentRules[] = 'regex:/^'.$champ['data']['mask'].'$/i';
             }
 
             switch ($champ['type']) {
                 case 'fichier':
                     $format = $champ['data']['format'] ?: null;
                     if (! empty($format)) {
-                        $ruleStr .= "|extensions:{$format}";
+                        $currentRules[] = "extensions:{$format}";
                     }
                     break;
             }
-            $rules['formData.'.$champ['data']['slug']] = trim($ruleStr, '|');
+            $rules['formData.'.$champ['data']['slug']] = $currentRules;
         }
 
         return $rules;
@@ -86,6 +89,7 @@ class ContactForm extends Component
     {
         $validated = $this->validate($this->getRules());
         $this->sendingError = false;
+        $this->formSent = false;
 
         $formattedData = $this->formatDataForMail($validated['formData']);
 
@@ -109,6 +113,9 @@ class ContactForm extends Component
                 )
         ) {
             $this->formSent = true;
+
+            // Reset du formulaire
+            $this->prepareForm();
         } else {
             $this->sendingError = true;
         }

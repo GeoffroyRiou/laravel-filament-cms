@@ -1,16 +1,16 @@
 <form wire:submit="send">
 
-    <div class="contact-form__fields">
+    <div>
 
         @if ($sendingError || $formSent)
-            <div class="contact-form__row -large">
+            <div>
                 <x-front-message :message="!$formSent ? 'Une erreur est survenue' : 'Votre message a bien été envoyé'" :modificators="!$formSent ? '-error' : '-success'" />
             </div>
         @endif
 
         @foreach ($form->champs as $blockIndex => $block)
-            <div
-                class="contact-form__row @error('formData.' . $block['data']['slug']) -error @enderror {{ $block['data']['large'] ? '-large' : '' }}">
+            <div @error('formData.' . $block['data']['slug']) -error @enderror
+                {{ $block['data']['large'] ? '-large' : '' }}">
                 @switch($block['type'])
                     @case('bloc_texte')
                         <label for="{{ $block['data']['slug'] }}"
@@ -19,7 +19,7 @@
                     @break
 
                     @case('optin')
-                        <div class="contact-form__optin @error('formData.' . $block['data']['slug']) -error @enderror">
+                        <div class=" @error('formData.' . $block['data']['slug']) -error @enderror">
                             <input id="field_{{ $block['data']['slug'] }}" wire:model="formData.{{ $block['data']['slug'] }}"
                                 type="checkbox" value="1" class="field">
                             <label for="field_{{ $block['data']['slug'] }}" class="label">{!! $block['data']['texte'] !!}</label>
@@ -70,12 +70,9 @@
                 @endswitch
             </div>
         @endforeach
-        <div class="contact-form__row -large">
-            <button type="submit" class="contact-form__submit">
-                <div class="inner">
-                    <span class="text">Envoyer</span>
-                    {!! svgIcon('arrow-lien') !!}
-                </div>
+        <div>
+            <button type="submit">
+                Envoyer
             </button>
         </div>
     </div>

@@ -1,10 +1,74 @@
 <?php
 
+use App\Http\Controllers\CMS\CategorieController;
+use App\Http\Controllers\CMS\PostController;
+use App\Http\Controllers\Controller;
+use App\Models\Accueil;
 use App\Models\Categorie;
 use App\Models\MediaLibraryFile;
 use App\Models\Menu;
 use App\Models\Post;
 use App\Models\Scopes\PostScope;
+use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Str;
+
+/**
+ * Génère un tableau de noms de classe de controllers 
+ * héritant des controller de CMS
+ */
+function getCmsControllersClasses(): array
+{
+
+    $filesystem = new Filesystem();
+    $files = $filesystem->files(app_path('Http/Controllers/CMS'));
+
+    $controllers = [];
+
+    foreach ($files as $file) {
+        $class = 'App\Http\Controllers\CMS\\' . $filesystem->name($file);
+        $reflection = new ReflectionClass($class);
+
+        if ($reflection->isSubclassOf(Controller::class) && (
+            $reflection->getName() === PostController::class ||
+            $reflection->getName() === CategorieController::class ||
+            $reflection->isSubclassOf(PostController::class) ||
+            $reflection->isSubclassOf(CategorieController::class)
+        )) {
+            $controllers[] = $class;
+        }
+    }
+
+    return $controllers;
+}
+
+/**
+ * Cherche un fichier de vue en se basant sur un slug
+ * Utilisé pour rechercher de manière automatique une vue pour un post
+ */
+function getViewNameFromSlug(string $search, string $path = null) : string | null
+{
+    $viewsPath = resource_path('views/pages');
+    $path = $path ?? $viewsPath;
+
+    $filesystem = new \Illuminate\Filesystem\Filesystem();
+
+    $directories = $filesystem->directories($path);
+    $files = $filesystem->files($path);
+
+    foreach ($files as $file) {
+        if ($file->getFilename() === $search . '.blade.php') {
+            // Extraction du nom de la vue avec sont arbo à partir du dossier views
+            return 'pages.'.trim(str_replace([$viewsPath,'.blade.php'],'', $file->getPathname()), '/');
+        }
+    }
+
+    foreach ($directories as $directory) {
+        $result = getViewNameFromSlug($search, $directory);
+        if ($result) return $result;
+    }
+
+    return null;
+}
 
 /**
  * Crée le html nécessaire pour appeler une icône svg disponible dans les assets
@@ -14,12 +78,12 @@ use App\Models\Scopes\PostScope;
  */
 function svgIcon(string $name, ?string $cssclass = null): ?string
 {
-    if (! $name) {
+    if (!$name) {
         return null;
     }
 
-    $style = $cssclass ?? 'icon';
-    $svgStr = "<svg class=\"$style\"><use xlink:href=\"#icon-$name\"></use></svg>";
+    $style = $cssclass ?? '';
+    $svgStr = "<svg class=\"icon $style\"><use xlink:href=\"#icon-$name\"></use></svg>";
 
     return $svgStr;
 }
@@ -33,9 +97,9 @@ function svgContent(string $svgName): string
         return '';
     }
 
-    $svgPath = public_path('images/svgs/'.$svgName.'.svg');
+    $svgPath = public_path('images/svgs/' . $svgName . '.svg');
 
-    if (! file_exists($svgPath)) {
+    if (!file_exists($svgPath)) {
         return '';
     }
 
@@ -52,7 +116,7 @@ function getMenu(int $menuId): array
     $menu = Menu::find($menuId);
 
     $liens = [];
-    if (! empty($menu->liens)) {
+    if (!empty($menu->liens)) {
         foreach ($menu->liens as $lienMenu) {
             switch ($lienMenu['type']) {
                 case 'page':
@@ -93,7 +157,7 @@ function getAllEnumValues(array $enumValues, bool $valuesAsKeys = true): array
     $roles = [];
 
     foreach ($enumValues as $key => $case) {
-        $roles[$valuesAsKeys ? $case->value : $key] = __('admin.'.$case->value);
+        $roles[$valuesAsKeys ? $case->value : $key] = __('admin.' . $case->value);
     }
 
     return $roles;
@@ -108,7 +172,7 @@ function getPost(int $postId): ?Post
     // Récupération du post sans distinction de son type
     $post = Post::withoutGlobalScope(PostScope::class)->find($postId);
 
-    if (! $post) {
+    if (!$post) {
         return null;
     }
 
@@ -127,7 +191,7 @@ function getCategorie(int $categId): ?Post
     // Récupération du post sans distinction de son type
     $post = Categorie::withoutGlobalScope(PostScope::class)->find($categId);
 
-    if (! $post) {
+    if (!$post) {
         return null;
     }
 
@@ -145,7 +209,7 @@ function getPostUrl(int $postId): ?string
 
     $model = getPost($postId);
 
-    if (! $model) {
+    if (!$model) {
         return null;
     }
 
@@ -160,42 +224,31 @@ function getPostUrl(int $postId): ?string
 function getMediaFileUrl(MediaLibraryFile|int $media, string $size = 'thumbnail'): ?string
 {
 
-    $media = $media instanceof MediaLibraryFile ? $media : MediaLibraryFile::find($media);
+    $media = $media instanceof MediaLibraryFile ? $media : getMediaFile($media);
 
-    if (! $media) {
+    if (!$media) {
         return null;
     }
-
     return $media->getFirstMedia('*')->getUrl($media->isImage() ? $size : null);
 }
 
 /**
- * Cherche un fichier de vue en se basant sur un slug
- * Utilisé pour rechercher de manière automatique une vue pour un post
+ * Retourne l'url d'un media. S'il s'agit d'une image, possibilité de définir sa taille
+ *
+ * @param  int  $mediaId
  */
-function getViewNameFromSlug(string $search, ?string $path = null): ?string
+function getMediaFile(int $mediaId): ?MediaLibraryFile
 {
-    $viewsPath = resource_path('views');
-    $path = $path ?? $viewsPath;
+    return  MediaLibraryFile::find($mediaId) ?? null;
+}
+/**
+ * Indique si le post passé en paramètre est de type Accueil
+ */
+function isFrontPage(Post|Categorie $post = null): bool {
+    return $post ? get_class($post) === Accueil::class : false;
+}
 
-    $filesystem = new \Illuminate\Filesystem\Filesystem;
-
-    $directories = $filesystem->directories($path);
-    $files = $filesystem->files($path);
-
-    foreach ($files as $file) {
-        if (strpos($file->getFilename(), $search) !== false) {
-            // Extraction du nom de la vue avec sont arbo à partir du dossier views
-            return trim(str_replace([$viewsPath, '.blade.php'], '', $file->getPathname()), '/');
-        }
-    }
-
-    foreach ($directories as $directory) {
-        $result = getViewNameFromSlug($search, $directory);
-        if ($result) {
-            return $result;
-        }
-    }
-
-    return null;
+function pluralize(string $text, int $count): string
+{
+    return Str::of($text)->plural($count);
 }

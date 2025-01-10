@@ -8,20 +8,22 @@ use App\Traits\HasCMSFields;
 use Illuminate\Database\Eloquent\Attributes\ScopedBy;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use RalphJSmit\Laravel\SEO\Support\HasSEO;
 use Spatie\Translatable\HasTranslations;
 
-#[ScopedBy([new PostScope])]
+#[ScopedBy([new PostScope()])]
 class Post extends Model
 {
-    use HasCMSFields;
     use HasSEO;
     use HasTranslations;
+    use HasCMSFields;
 
     public $table = 'posts';
 
     protected $categorieModel = Categorie::class;
+    public static string $routeSlug = 'article';
 
     protected $fillable = [
         'titre',
@@ -80,6 +82,13 @@ class Post extends Model
     }
 
     /**
+     * Gère la relation avec l'ilustration
+     */
+    public function illustration(): BelongsTo {
+        return $this->belongsTo(MediaLibraryFile::class, 'media_library_file_id');
+    }
+
+    /**
      * Gère la relation avec les catégories
      */
     public function categories(): BelongsToMany
@@ -104,7 +113,11 @@ class Post extends Model
         // Prise en compte de la locale admin ou front
         $locale = $this->translationLocale ?? app()->getLocale();
 
-        $path = '';
+        $params = [
+            'slug' => $this->slug,
+        ];
+        $routeStr = static::$routeSlug.'.single';
+
         if (count($this->categories)) {
 
             $currentCategorie = $this->categories[0];
@@ -115,12 +128,11 @@ class Post extends Model
                 $currentCategorie = $currentCategorie->parent;
             }
 
-            $path .= trim($categoriesPath, '/');
+            $params['parents'] = trim($categoriesPath, '/');
+            $routeStr .= '.hierarchical';
         }
 
-        return route('cms', [
-            'cmsPath' => $path.'/'.$this->slug,
-        ]).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
+        return route($routeStr, $params).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
     }
 
     /**
