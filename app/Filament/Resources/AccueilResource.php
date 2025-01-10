@@ -2,24 +2,11 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Blocks\CMSPageFormSelect;
 use App\Filament\Resources\AccueilResource\Pages;
-use App\Forms\Components\MediaFileField;
 use App\Models\Accueil;
-use App\Models\Expertise;
-use App\Models\Page;
-use App\Models\Post;
-use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
-use Filament\Forms\Components\Section;
-use Filament\Forms\Components\Textarea;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
-use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
-use RalphJSmit\Filament\SEO\SEO;
 
 class AccueilResource extends PostResource
 {
