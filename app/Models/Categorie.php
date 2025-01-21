@@ -49,8 +49,8 @@ class Categorie extends Model
      */
     protected static function booted(): void
     {
-        static::creating(fn (self $categorie) => self::updateMandatoryDataBeforeSave($categorie));
-        static::updating(fn (self $categorie) => self::updateMandatoryDataBeforeSave($categorie));
+        static::creating(fn(self $categorie) => self::updateMandatoryDataBeforeSave($categorie));
+        static::updating(fn(self $categorie) => self::updateMandatoryDataBeforeSave($categorie));
     }
 
     /**
@@ -92,7 +92,7 @@ class Categorie extends Model
         $params = [
             'slug' => $this->slug,
         ];
-        $routeStr = static::$routeSlug.'.single';
+        $routeStr = static::$routeSlug . '.single';
 
         if ($this->parent) {
 
@@ -100,7 +100,7 @@ class Categorie extends Model
             $parentsPath = '';
 
             while ($currentParent) {
-                $parentsPath = "{$currentParent->getTranslation('slug', $locale)}/".$parentsPath;
+                $parentsPath = "{$currentParent->getTranslation('slug',$locale)}/" . $parentsPath;
                 $currentParent = $currentParent->parent;
             }
 
@@ -108,7 +108,7 @@ class Categorie extends Model
             $routeStr .= '.hierarchical';
         }
 
-        return route($routeStr, $params).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
+        return route($routeStr, $params) . ($addLocaleToUrl ? '?language=' . $this->translationLocale : '');
     }
 
     /**

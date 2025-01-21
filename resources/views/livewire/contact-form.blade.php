@@ -4,12 +4,12 @@
 
         @if ($sendingError || $formSent)
             <div>
-                <x-front-message :message="!$formSent ? 'Une erreur est survenue' : 'Votre message a bien été envoyé'" :modificators="!$formSent ? '-error' : '-success'" />
+                {{ !$formSent ? 'Une erreur est survenue' : 'Votre message a bien été envoyé' }}
             </div>
         @endif
 
         @foreach ($form->champs as $blockIndex => $block)
-            <div @error('formData.' . $block['data']['slug']) -error @enderror
+            <div 
                 {{ $block['data']['large'] ? '-large' : '' }}">
                 @switch($block['type'])
                     @case('bloc_texte')
@@ -68,6 +68,10 @@
                             type="{{ $block['data']['type'] ?? 'text' }}" class="field">
                     @break
                 @endswitch
+
+                @error('formData.' . $block['data']['slug']) 
+                <p>{{ $message }}</p>
+                @enderror
             </div>
         @endforeach
         <div>

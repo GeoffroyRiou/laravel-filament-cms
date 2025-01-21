@@ -15,7 +15,7 @@ class LanguageMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $lng = $request->get('language') ?? session('language', config('app.fallback_locale'));
+        $lng = $request->get('language') ?? session('language', config('app.locale'));
 
         session(['language' => $lng]);
         app()->setLocale($lng);

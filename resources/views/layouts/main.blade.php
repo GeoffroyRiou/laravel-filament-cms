@@ -11,11 +11,11 @@
 </head>
 
 <body>
-    <x-front-main-header :currentPost="$post ?? null" />
+    <x-front.header :currentPost="$post ?? null" />
 
     @yield('content')
 
-    <x-front-footer />
+    <x-front.footer />
 
     <x-gtag />
     <x-matomo />

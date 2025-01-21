@@ -1,9 +1,8 @@
-@php
-    $logos = $post->field('logos') ?? [];
-    $actualites = $post->field('actualites') ?? [];
-@endphp
-
 @extends('layouts.main', compact('post'))
+
+@php
+    $menu = getMenu(1);
+@endphp
 
 @section('content')
     Accueil

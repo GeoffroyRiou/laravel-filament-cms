@@ -45,7 +45,7 @@ function getCmsControllersClasses(): array
  * Cherche un fichier de vue en se basant sur un slug
  * Utilisé pour rechercher de manière automatique une vue pour un post
  */
-function getViewNameFromSlug(string $search, string $path = null) : string | null
+function getViewNameFromSlug(string $search, string $path = null): string | null
 {
     $viewsPath = resource_path('views/pages');
     $path = $path ?? $viewsPath;
@@ -58,7 +58,7 @@ function getViewNameFromSlug(string $search, string $path = null) : string | nul
     foreach ($files as $file) {
         if ($file->getFilename() === $search . '.blade.php') {
             // Extraction du nom de la vue avec sont arbo à partir du dossier views
-            return 'pages.'.trim(str_replace([$viewsPath,'.blade.php'],'', $file->getPathname()), '/');
+            return 'pages.' . trim(str_replace([$viewsPath, '.blade.php'], '', $file->getPathname()), '/');
         }
     }
 
@@ -112,32 +112,40 @@ function svgContent(string $svgName): string
  */
 function getMenu(int $menuId): array
 {
-
     $menu = Menu::find($menuId);
-
     $liens = [];
+    $currentParent = null;
+
     if (!empty($menu->liens)) {
         foreach ($menu->liens as $lienMenu) {
+            $menuItem = [];
+
             switch ($lienMenu['type']) {
                 case 'page':
                     $post = getPost($lienMenu['data']['page']);
-
-                    $liens[] = [
+                    $menuItem = [
                         'lien' => $post->getUrl(),
                         'texte' => $post->titre,
                     ];
                     break;
                 case 'categorie':
                     $categorie = getCategorie($lienMenu['data']['categorie']);
-
-                    $liens[] = [
+                    $menuItem = [
                         'lien' => $categorie->getUrl(),
                         'texte' => $categorie->nom,
                     ];
                     break;
                 default:
-                    $liens[] = $lienMenu['data'];
+                    $menuItem = $lienMenu['data'];
                     break;
+            }
+
+            if ($lienMenu['data']['niveau'] == 1) {
+                $menuItem['children'] = [];
+                $liens[] = $menuItem;
+                $currentParent = count($liens) - 1;
+            } else {
+                $liens[$currentParent]['children'][] = $menuItem;
             }
         }
     }
@@ -244,7 +252,8 @@ function getMediaFile(int $mediaId): ?MediaLibraryFile
 /**
  * Indique si le post passé en paramètre est de type Accueil
  */
-function isFrontPage(Post|Categorie $post = null): bool {
+function isFrontPage(Post|Categorie $post = null): bool
+{
     return $post ? get_class($post) === Accueil::class : false;
 }
 

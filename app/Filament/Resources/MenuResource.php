@@ -55,6 +55,10 @@ class MenuResource extends Resource
                                         ->activeUrl(),
                                     Checkbox::make('blank')
                                         ->label('Ouvrir dans un nouvel onglet'),
+                                    Select::make('niveau')->options([
+                                        '1' => 'Niveau 1',
+                                        '2' => 'Niveau 2',
+                                    ])->required()
                                 ]),
                             Builder\Block::make('page')
                                 ->label('Page du site')
@@ -65,6 +69,10 @@ class MenuResource extends Resource
                                             ->options(Post::withoutGlobalScopes()->get()->pluck('titre', 'id'))
                                             ->searchable()
                                             ->required(),
+                                        Select::make('niveau')->options([
+                                            '1' => 'Niveau 1',
+                                            '2' => 'Niveau 2',
+                                        ])->required(),
                                     ]
                                 ),
                             Builder\Block::make('categorie')
@@ -76,6 +84,10 @@ class MenuResource extends Resource
                                             ->options(Categorie::withoutGlobalScopes()->get()->pluck('nom', 'id'))
                                             ->searchable()
                                             ->required(),
+                                        Select::make('niveau')->options([
+                                            '1' => 'Niveau 1',
+                                            '2' => 'Niveau 2',
+                                        ])->required(),
                                     ]
                                 ),
                         ])->columnSpan(2),
