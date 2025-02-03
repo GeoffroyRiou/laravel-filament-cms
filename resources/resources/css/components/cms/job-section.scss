@@ -1,0 +1,121 @@
+.cms-job-section{
+
+    @apply
+    flex
+    flex-col;
+
+    @apply
+    md:flex-row;
+}
+
+.cms-job-section__content{
+    @apply
+    px-5
+    py-8
+    bg-white
+    order-2;
+
+    @apply
+    md:flex-[2_2_0%];
+
+    @apply
+    lg:py-28;
+
+    &:not(.-reverse){
+        @apply
+        md:order-1;
+    }
+
+    > .inner{
+        @apply
+        flex
+        flex-col
+        gap-5
+        max-w-[860px]
+        mx-auto;
+
+        @apply
+        lg:gap-10;
+    }
+}
+
+.cms-job-section__paragraphs{
+    @apply
+    cms-generic-content;
+
+    &:first > .title{
+        @apply
+        mt-0;
+    }
+
+    > .title{
+        @apply
+        px-2
+        py-px
+        font-semibold
+        w-fit
+        rounded-md
+        mt-3;
+
+        @apply
+        md:text-xl;
+
+        &.-main-l{
+            @apply
+            text-pr-main-d
+            bg-pr-main-l;
+        }
+        &.-main-m{
+            @apply
+            text-white
+            bg-pr-main-m;
+        }
+        &.-second-m{
+            @apply
+            text-pr-main-d
+            bg-pr-second-m;
+        }
+    }
+}
+
+.cms-job-section____image{
+    @apply
+    relative
+    flex
+    items-center
+    justify-center
+    p-10
+    bg-pr-second-m
+    overflow-hidden
+    order-1;
+
+    @apply
+    md:flex-1;
+
+    &:not(.-reverse){
+        @apply
+        md:order-2;
+    }
+
+    > .picture{
+        @apply
+        relative
+        z-10;
+    }
+
+    > .grid{
+        @apply
+        absolute
+        bottom-0
+        right-0
+        translate-x-[10%]
+        translate-y-[20%]
+        w-[450px]
+        h-[450px]
+        fill-pr-second-l;
+
+        @apply
+        lg:w-[700px]
+        lg:h-[700px];
+    }
+}

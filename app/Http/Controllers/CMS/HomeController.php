@@ -14,13 +14,13 @@ class HomeController extends PostController
 
     public function __invoke()
     {
-        $accueil = Accueil::first();
-
-        if (!$accueil) {
+        $view = $this->single('accueil');
+        
+        if (!$this->post) {
             return "La page d'accueil n'a pas été créée dans le panneau d'administration";
         }
 
-        return $this->single('accueil');
+        return $view;
     }
 
     protected function getOtherViewData(): array

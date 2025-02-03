@@ -1,0 +1,76 @@
+.cms-stripe{
+    @apply
+    flex
+    gap-5
+    items-center
+    justify-center
+    p-5
+    bg-pr-second-m;
+
+    @apply
+    md:py-10
+    md:gap-8;
+
+
+    &.-dark{
+        @apply
+        gap-2
+        flex-col
+        items-center
+        bg-pr-main-m;
+
+        @apply
+        lg:gap-5
+        lg:flex-row
+        lg:items-start
+        lg:py-20;
+    }
+}
+
+.cms-stripe__image{
+    @apply
+    shrink-0
+    w-24
+    flex
+    justify-center;
+
+    @apply
+    md:w-32;
+
+    &.-dark {
+        @apply
+        lg:items-start
+        lg:justify-end;
+
+        > .picture{
+            @apply
+            w-[50%];
+        }
+    }
+
+    > .picture{
+        @apply
+        w-full;
+    }
+}
+
+.cms-stripe__content{
+    @apply
+    flex
+    flex-col
+    max-w-[525px];
+
+    @apply
+    md:gap-3;
+
+    &.-dark{
+        @apply
+        gap-3
+        items-center;
+    }
+
+    > .text{
+        @apply
+        text-pr-main-d;
+    }
+}

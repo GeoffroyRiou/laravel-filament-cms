@@ -1,0 +1,221 @@
+.header-menu{
+    @apply
+    fixed
+    inset-0
+    flex
+    flex-col
+    bg-pr-second-l
+    opacity-0
+    pointer-events-none
+    transition-opacity
+    duration-1000;
+
+    @apply
+    xl:transition-none
+    xl:bg-transparent
+    xl:static
+    xl:opacity-100
+    xl:pointer-events-auto;
+
+    &.-active{
+        @apply
+        opacity-100
+        pointer-events-auto;
+    }
+}
+
+.header-menu__topbar{
+    @apply
+    flex
+    justify-between;
+
+    @apply
+    xl:hidden;
+
+    > .text{
+        @apply
+        flex-1
+        flex
+        items-center
+        px-5
+        h-16
+        font-mollges
+        bg-white
+        text-4xl
+        text-pr-main-m;
+    }
+
+    > .close{
+        @apply
+        w-16
+        flex
+        items-center
+        justify-center
+        bg-pr-main-l;
+
+        > .icon{
+            @apply
+            h-4
+            w-4
+            fill-pr-main-m;
+        }
+    }
+}
+
+.header-menu__body{
+    @apply
+    flex-1
+    p-8
+    bg-pr-second-l
+    overflow-auto
+    flex
+    flex-col
+    gap-5
+    max-w-[500px]
+    mx-auto;
+
+    @apply
+    xl:p-0
+    xl:max-w-none
+    xl:overflow-visible
+    xl:bg-transparent;
+}
+
+.header-menu__body__menu{
+
+    @apply
+    xl:bg-white
+    xl:rounded-xl;
+
+    &, .item, .submenu{
+        @apply
+        flex
+        flex-col
+        gap-2;
+    
+        @apply
+        xl:flex-row;
+    }
+
+    .item{
+        @apply
+        relative;
+    }
+
+    .link{
+        @apply
+        flex
+        gap-2
+        items-center
+        p-4
+        rounded-xl
+        bg-white
+        cursor-pointer;
+
+        @apply
+        xl:py-2;
+
+        &:hover, &.-active{
+            @apply
+            bg-pr-second-m;
+
+            @apply
+            xl:bg-transparent;
+
+            
+            > .text{
+                @apply
+                xl:text-pr-third-m;
+            }
+
+            > .arrow{
+                @apply
+                xl:fill-pr-third-m;
+            }
+        }
+
+        &.-active{
+
+            > .arrow{
+                @apply
+                -rotate-180;
+            }
+        }
+
+
+        > .text{
+            @apply
+            xl:transition-colors
+            text-pr-main-d
+            font-extrabold;
+        }
+
+        > .arrow{
+            @apply
+            ml-auto
+            mr-0
+            w-3.5
+            h-1.5
+            fill-pr-main-d
+            transition-all;
+        }
+    }
+
+    
+
+    .submenu{
+        @apply
+        ml-5
+        hidden;
+
+        @apply
+        xl:absolute
+        xl:top-[calc(100%+1rem)]
+        xl:left-0
+        xl:bg-white
+        xl:flex-col
+        xl:gap-0
+        xl:rounded-xl
+        xl:py-1;
+
+        &.-active{
+            @apply
+            flex;
+        }
+
+        .link{
+            @apply
+            xl:py-1
+            xl:whitespace-nowrap;
+        }
+
+        .link > .text{
+            @apply
+            text-pr-main-m
+            font-medium
+            w-full;
+
+            &:hover{
+                @apply
+                xl:text-pr-third-m;
+            }
+        }
+    }
+}
+
+.header-menu__body__footer{
+    @apply
+    flex
+    flex-col
+    gap-5;
+
+    @apply
+    xl:hidden;
+
+    > .section{
+        @apply
+        flex
+        flex-col
+        gap-2;
+    }
+}

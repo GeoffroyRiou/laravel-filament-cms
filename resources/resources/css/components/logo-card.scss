@@ -1,0 +1,33 @@
+.logo-card{
+    @apply
+    block;
+
+    > .figure{
+        @apply
+        flex
+        flex-col
+        items-center
+        bg-white
+        rounded-md
+        p-3
+        border-2
+        border-transparent;
+
+        @apply
+        xl:transition-colors
+        xl:hover:border-pr-third-m;
+        
+        > .logo{
+            @apply
+            h-[100px];
+        }
+    
+        > .text{
+            @apply
+            mb-0
+            mt-auto
+            text-pr-main-d
+            font-light;
+        }
+    }
+}

@@ -18,7 +18,6 @@ class PageController extends PostController
     {
         if($this->slug === 'nos-realisations'){
             return [
-                'references' => Reference::published()->orderby('created_at','desc')->get(),
                 'rubriques' => Rubrique::all()
             ];
         }

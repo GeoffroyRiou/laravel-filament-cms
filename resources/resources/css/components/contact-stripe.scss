@@ -1,0 +1,67 @@
+.contact-stripe{
+
+    @apply
+    gap-5
+    not-italic
+    text-pr-main-d;
+
+    &.-main-l{
+        @apply
+        text-pr-main-l;
+    
+        > .item > .icon{
+            @apply
+            fill-pr-main-l;
+        }
+
+        > .item > .text{
+            @apply
+            border-pr-main-l;
+        }
+    }
+
+    &.-white{
+        @apply
+        text-white;
+    
+        > .item > .icon{
+            @apply
+            fill-white;
+        }
+
+        > .item > .text{
+            @apply
+            border-white;
+        }
+    }
+
+    &, > .item{
+        @apply
+        inline-flex
+        items-center
+        justify-center
+        font-bold;
+    }
+
+    > .item{
+
+        @apply
+        gap-2;
+
+        > .text{
+            @apply
+            pl-2
+            border-l
+            leading-[1em]
+            border-pr-main-d;
+        }
+    
+        > .icon{
+            @apply
+            shrink-0
+            w-5
+            h-5
+            fill-pr-main-d;
+        }
+    }
+}

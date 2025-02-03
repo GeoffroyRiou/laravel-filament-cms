@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Page;
+use App\Models\Post;
 use App\Models\Settings;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Illuminate\Support\Facades\URL;
@@ -27,10 +29,9 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        Debugbar::disable();
-        try {
+        if (!$this->app->runningInConsole()) {
             View::share('settings', Settings::first());
-        } catch (\Exception $e) {
+            View::share('allPages', Page::published()->with('categories')->with('categories.parent')->with('categories.children')->with('categories.children.parent')->get());
         }
     }
 }

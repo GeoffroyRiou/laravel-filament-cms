@@ -43,7 +43,10 @@ class MenuResource extends Resource
                     Builder::make('liens')
                         ->label('')
                         ->addActionLabel('Ajouter un lien')
-                        ->schema([
+                        ->reorderableWithButtons()
+                        ->collapsible()
+                        ->cloneable()
+                        ->blocks([
                             Builder\Block::make('lien')
                                 ->label('Lien personnalisé')
                                 ->schema([
@@ -51,8 +54,7 @@ class MenuResource extends Resource
                                         ->label('Texte du lien')
                                         ->required(),
                                     TextInput::make('lien')
-                                        ->required()
-                                        ->activeUrl(),
+                                        ->required(),
                                     Checkbox::make('blank')
                                         ->label('Ouvrir dans un nouvel onglet'),
                                     Select::make('niveau')->options([

@@ -1,0 +1,75 @@
+.cms-administrator-word{
+
+    @apply
+    py-8;
+
+    @apply
+    md:py-24;
+
+    > .inner{
+        @apply
+        g-container
+        flex
+        flex-col
+        gap-5;
+
+        @apply
+        md:gap-10;
+
+        > .text{
+            @apply
+            cms-generic-content
+            max-w-[1000px]
+            mx-auto;
+        }
+    }
+}
+
+.cms-administrator-word__signature{
+    @apply
+    flex
+    gap-5
+    items-center
+    relative
+    max-w-[450px]
+    mx-auto;
+
+    > .photo{
+        @apply
+        rounded-full
+        shrink-0;
+    }
+
+    > .text{
+
+        > .name{
+            @apply
+            font-mollges
+            text-2xl
+            text-pr-main-d;
+
+            @apply
+            md:text-4xl;
+        }
+        
+        > .role{
+            @apply
+            font-light;  
+        }
+    }
+
+    > .signature{
+        @apply
+        absolute
+        bottom-0
+        right-0
+        translate-x-[20%]
+        translate-y-[30%]
+        w-[100px];
+
+        @apply
+        md:w-[150px]
+        md:translate-x-[50%]
+        md:translate-y-[50%];
+    }
+}

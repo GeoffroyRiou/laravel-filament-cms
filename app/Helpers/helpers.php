@@ -8,8 +8,11 @@ use App\Models\Categorie;
 use App\Models\MediaLibraryFile;
 use App\Models\Menu;
 use App\Models\Post;
+use App\Models\Scopes\CategorieScope;
 use App\Models\Scopes\PostScope;
+use App\Services\ImageService;
 use Illuminate\Filesystem\Filesystem;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 /**
@@ -117,19 +120,39 @@ function getMenu(int $menuId): array
     $currentParent = null;
 
     if (!empty($menu->liens)) {
+
+        // Récupération des objets posts
+
+        $postsIds = [];
+        $categsIds = [];
+
+        foreach ($menu->liens as $lien) {
+            if ($lien['type'] === 'page') {
+                $postsIds[] = $lien['data']['page'];
+            }
+            if ($lien['type'] === 'categorie') {
+                $categsIds[] = $lien['data']['categorie'];
+            }
+        }
+
+        $posts = Post::withoutGlobalScope(PostScope::class)->whereIn('id', $postsIds)->get();
+        $categs = count($categsIds) ? Categorie::withoutGlobalScope(CategorieScope::class)->whereIn('id', $categsIds)->get() : collect();
+
+        // Constitution des données du menu
+
         foreach ($menu->liens as $lienMenu) {
             $menuItem = [];
 
             switch ($lienMenu['type']) {
                 case 'page':
-                    $post = getPost($lienMenu['data']['page']);
+                    $post = $posts->where('id', $lienMenu['data']['page'])->first();
                     $menuItem = [
                         'lien' => $post->getUrl(),
                         'texte' => $post->titre,
                     ];
                     break;
                 case 'categorie':
-                    $categorie = getCategorie($lienMenu['data']['categorie']);
+                    $categorie = $categs->where('id', $lienMenu['data']['categorie'])->first();
                     $menuItem = [
                         'lien' => $categorie->getUrl(),
                         'texte' => $categorie->nom,
@@ -260,4 +283,37 @@ function isFrontPage(Post|Categorie $post = null): bool
 function pluralize(string $text, int $count): string
 {
     return Str::of($text)->plural($count);
+}
+
+/**
+ * Retourne un extrait d'un texte
+ */
+function excerpt(string $text, int $words = 20): string
+{
+    $textWords = str_word_count(strip_tags($text), 1);
+    $truncated = implode(' ', array_slice($textWords, 0, $words));
+
+    return $truncated . (count($textWords) > $words ? '...' : '');
+}
+
+/**
+ * Convertit une date au format yyyy-mm-dd en format localisé
+ */
+function formatDateLocalized(string $date, string $format = 'd/m/Y'): string
+{
+    return Carbon\Carbon::parse($date)->translatedFormat($format);
+}
+
+/**
+ * Retourne l'url d'une image aux dimensions demandées
+ * @param  string  $path  Le chemin de l'image
+ * @param  int  $width  La largeur de l'image
+ * @param  int  $height  La hauteur de l'image
+ * @param  bool  $crop  Indique si l'image doit être recadrée
+ * @return string
+ **/
+function imageUrl(string $path, int $width = 100, int $height = 100, bool $crop = true): string
+{
+    $imageService = app(ImageService::class);
+    return Storage::url($imageService->getResizedImage($path, $width, $height, $crop));
 }

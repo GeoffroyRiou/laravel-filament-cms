@@ -1,0 +1,132 @@
+.cms-hero{
+    @apply
+    overflow-hidden;
+}
+
+.cms-hero__inner {
+
+    @apply
+    relative
+    g-container
+    flex
+    flex-col
+    gap-10
+    py-12;
+
+    @apply
+    md:grid
+    md:grid-cols-2
+    md:items-center;
+
+    @apply
+    lg:py-24;
+
+
+    > .col {
+
+        @apply
+        relative
+        z-10;
+
+        > .illustration{
+            @apply
+            w-full
+            max-w-[610px];
+        }
+    }
+
+    > .cloud{
+        @apply
+        absolute
+        hidden;
+
+        @apply
+        lg:block;
+
+        &.-left{
+            @apply
+            -left-[20%]
+            bottom-[10%];
+        }
+
+        &.-right{
+            @apply
+            -right-[10%]
+            bottom-[5%];
+        }
+    }
+}
+
+.cms-hero__right-col{
+    @apply
+    text-center;
+
+    @apply
+    md:text-left;
+
+   
+
+    > .content{
+        @apply
+        gap-5
+        mx-auto
+        max-w-[615px];
+
+        &, > .middle, > .footer{
+            @apply
+            flex
+            flex-col;
+        }
+
+        > .middle, > .footer{
+            @apply
+            gap-2;
+        }
+    
+        > .middle{
+            @apply
+            items-center;
+    
+            @apply
+            md:items-start;
+        }
+
+        > .text{
+            @apply
+            lg:text-2xl;
+        }
+
+        > .footer{
+            @apply
+            sm:grid
+            sm:grid-cols-2;
+        }
+    }
+}
+
+.cms-hero__scrollto{
+    @apply
+    absolute
+    left-1/2
+    bottom-3
+    -translate-x-1/2
+    flex
+    items-center
+    justify-center
+    w-5
+    h-5
+    bg-white
+    rounded-full;
+
+    @apply
+    lg:w-8
+    lg:h-8
+    lg:bottom-8;
+
+    > .icon{
+        @apply
+        w-2.5
+        h-2.5
+        fill-pr-main-m;
+    }
+}

@@ -8,12 +8,15 @@ use App\Filament\Resources\PostResource\Pages;
 use App\Forms\Components\MediaFileField;
 use App\Models\Post;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
@@ -52,10 +55,12 @@ class PostResource extends Resource
      */
     protected static function getCmsFormSchema(
         array $customFields = [],
+        bool $hasExerpt = true,
         bool $hasBuilder = true,
         bool $hasIllustration = true,
         bool $hasTags = true,
-        bool $hasCategories = true
+        bool $hasCategories = true,
+        bool $hasPrivateOption = true,
     ): array {
 
         $mainFields = [
@@ -68,9 +73,10 @@ class PostResource extends Resource
         ];
 
         if ($hasIllustration) {
-            $mainFields[] = MediaFileField::make('media_library_file_id')
+            $mainFields[] = FileUpload::make('illustration')
                 ->label('Illustration')
-                ->imagesOnly(true)
+                ->image()
+                ->maxSize(5120)
                 ->columnSpan(2);
         }
 
@@ -100,6 +106,22 @@ class PostResource extends Resource
                 ->columnSpan(2);
         }
 
+
+        if ($hasExerpt) {
+            $sidebarFields[] = Textarea::make('excerpt')
+                ->label('Extrait')
+                ->columnSpan(2);
+        }
+
+
+        if ($hasPrivateOption) {
+            $sidebarFields[] = Toggle::make('private')
+                ->label('Page privée')
+                ->default(false)
+                ->helperText('Si la page est privée, elle ne sera visible que par les utilisateurs connectés.')
+                ->columnSpan(2);
+        }
+
         return array_merge(
             [
                 // Deux colonnes responsives
@@ -120,7 +142,10 @@ class PostResource extends Resource
                     Section::make('Contenu de la page')
                     ->schema([
                         CMSField::make('contenu')
-                            ->columnSpan(2),
+                            ->columnSpan(2)
+                            ->collapsed()
+                            ->collapsible()
+                            ->cloneable(),
                     ]) :
                     Hidden::make('ignoredBuilder')
                 ),
@@ -172,10 +197,10 @@ class PostResource extends Resource
                         ->dateTime('d F Y à H:i'),
                     IconColumn::make('statut')
                         ->label('Publication')
-                        ->icon(fn (string $state): string => match ($state) {
+                        ->icon(fn(string $state): string => match ($state) {
                             'draft' => 'heroicon-o-clock',
                             'published' => 'heroicon-o-check-circle',
-                        })->color(fn (string $state): string => match ($state) {
+                        })->color(fn(string $state): string => match ($state) {
                             'draft' => 'warning',
                             'published' => 'primary',
                         }),
@@ -188,7 +213,7 @@ class PostResource extends Resource
                 EditAction::make(),
                 Action::make('voir')
                     ->icon('heroicon-o-eye')
-                    ->url(fn (Post $record) => $record->getUrl(true)),
+                    ->url(fn(Post $record) => $record->getUrl(true)),
                 DeleteAction::make(),
             ])
             ->bulkActions([

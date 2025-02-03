@@ -1,0 +1,146 @@
+.g-footer{
+    @apply
+    py-12
+    bg-pr-main-d;
+
+    > .inner{
+        @apply
+        g-container
+        flex
+        flex-col
+        gap-5;
+    }
+}
+
+.g-footer__row{
+    @apply
+    flex
+    flex-col
+    gap-5
+    max-w-[500px]
+    mx-auto
+    items-center;
+
+    @apply
+    lg:flex-row
+    lg:justify-between
+    lg:w-full
+    lg:max-w-none;
+
+    > .col{
+        @apply
+        w-full
+        flex
+        flex-col
+        gap-2
+        items-center
+        order-2;
+
+        @apply
+        lg:flex-1;
+
+        &.-first-mobile{
+            @apply
+            order-1;
+
+            @apply
+            lg:max-w-none
+            lg:order-2;
+        }
+    }
+}
+
+.g-footer__contact, .g-footer__buttons{
+    @apply
+    flex
+    flex-col
+    gap-2
+    order-2;
+
+    @apply
+    lg:flex-1
+    lg:max-w-[280px];
+}
+
+.g-footer__contact{
+    @apply
+    items-start;
+}
+
+.g-footer__buttons{
+    @apply
+    w-full
+    items-center;
+}
+
+.g-footer__premenu{
+    @apply
+    w-full
+    gap-2
+    grid
+    grid-cols-2;
+
+    @apply
+    lg:mt-24
+    lg:max-w-[300px]
+    lg:mx-auto;
+}
+
+
+
+.g-footer__menu{
+    @apply
+    text-center;
+    @apply
+    lg:max-w-none
+    lg:w-full
+    lg:justify-center;
+
+    &, > .menu{
+        @apply
+        flex
+        flex-col
+        gap-2;
+
+        @apply
+        lg:flex-row
+        lg:gap-5;
+    }
+
+    .link{
+        @apply
+        inline-flex
+        items-center
+        gap-2
+        text-white
+        underline
+        underline-offset-4
+        xl:transition-colors
+        xl:duration-300;
+
+        &:hover{
+            @apply
+            xl:text-pr-main-l;
+        }
+
+        &.-iif {
+        
+            &:hover{
+                > .icon{
+                    @apply
+                    xl:fill-pr-main-l;
+                }
+            }
+            > .icon{
+                @apply
+                w-[6rem]
+                h-5
+                fill-white
+                xl:transition-colors
+                xl:duration-300;
+            }
+        }
+    }
+
+    
+}

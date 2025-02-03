@@ -5,6 +5,7 @@ namespace App\Http\Controllers\CMS;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
 class PostController extends Controller
@@ -16,12 +17,12 @@ class PostController extends Controller
 
     protected ?string $slug = null;
 
-    public function single(string $slug): View
+    public function single(string $slug):  View|RedirectResponse
     {
         return $this->getPostPage($slug);
     }
 
-    public function singleHierarchical(string $categories, string $slug): View
+    public function singleHierarchical(string $categories, string $slug):  View|RedirectResponse
     {
         return $this->getPostPage($slug);
     }
@@ -29,10 +30,14 @@ class PostController extends Controller
     /**
      * Récupère le post et retourne sa vue
      */
-    private function getPostPage(string $slug): View
+    private function getPostPage(string $slug): View|RedirectResponse
     {
         $this->slug = $slug;
         $this->post = $post = $this->getPost(static::$model, $slug);
+
+        if ($this->post->private && !Auth::check()) {
+            return redirect()->route('login');
+        }
 
         $view = getViewNameFromSlug($post->slug) ?? $this->view;
 
@@ -48,7 +53,7 @@ class PostController extends Controller
      */
     protected function getPost(string $classPath, string $slug): Post|RedirectResponse
     {
-        $post = $classPath::where('model', $classPath)->where('slug->'.app()->getLocale(), $slug)->firstOrFail();
+        $post = $classPath::where('model', $classPath)->where('slug->' . app()->getLocale(), $slug)->firstOrFail();
 
         // Pas de contenu pour la langue sélectionnée
         if (empty($post->titre) && empty($post->contenu)) {

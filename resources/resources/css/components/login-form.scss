@@ -1,0 +1,74 @@
+@use 'button.scss';
+
+.login-form{
+    @apply
+    flex
+    flex-col
+    items-center
+    gap-7
+    p-12
+    bg-white
+    rounded-[40px];
+}
+
+.login-form__head{
+    @apply
+    flex
+    flex-col
+    items-center
+    gap-2;
+
+    > .title{
+        @apply
+        text-pr-main-m
+        font-light
+        text-2xl;
+    }
+}
+
+.login-form__fields{
+    @apply
+    flex
+    flex-col
+    items-center
+    gap-2
+    w-full;
+
+    > .row{
+        @apply
+        flex
+        flex-col
+        gap-1
+        relative
+        w-full;
+
+        > .label{
+            @apply
+            text-xs
+            text-pr-main-d
+            text-center;
+        }
+
+        > .field{
+            @apply
+            bg-pr-second-l
+            text-pr-main-m
+            p-2
+            rounded-xl
+            text-center;
+
+            &:focus{
+                @apply
+                outline-pr-main-m;
+            }
+        }
+    }
+}
+
+.login-form__submit{
+    @extend .g-button, .-main-l;
+
+    
+    @apply
+    uppercase ;
+}

@@ -1,0 +1,85 @@
+.title-lvl2 {
+    @apply
+    flex
+    flex-col
+    items-center
+    gap-2
+    font-mollges
+    text-4xl
+    text-pr-main-m
+    text-center;
+
+    @apply
+    md:text-left
+    md:flex-row
+    md:gap-5;
+
+    @apply
+    lg:text-[4rem]
+    lg:leading-[3.5rem];
+
+    @apply
+    xl:text-[5rem]
+    xl:leading-[4.5rem];
+
+    &.-white > .text {
+        > .light, > .dark{
+            @apply
+            text-white;
+        }
+    }
+
+    &.-main-d > .text {
+        > .light, > .dark{
+            @apply
+            text-pr-main-d;
+        }
+    }
+
+    &.-over-main-l > .text ,&.-over-main-lr > .text {
+        > .light, > .dark{
+            @apply
+            text-pr-main-d;
+        }
+    }
+
+    &.-over-main-m > .text {
+        > .light, > .dark{
+            @apply
+            text-white;
+        }
+    }
+
+    &.-over-second-m > .text {
+        > .light, > .dark{
+            @apply
+            text-pr-main-d;
+        }
+    }
+
+    &.-always-centered {
+        @apply
+        items-center;
+        
+        > .text {
+            @apply
+            mx-auto
+            md:text-center;
+        }
+    }
+
+    > .icon{
+        @apply
+        w-10
+        h-10;
+
+        @apply
+        md:w-20
+        md:h-20;
+    }
+
+    > .text > .light{
+        @apply
+        text-pr-main-l;
+    }
+}

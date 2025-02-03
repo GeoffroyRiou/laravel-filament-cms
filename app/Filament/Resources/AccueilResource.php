@@ -4,6 +4,9 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\AccueilResource\Pages;
 use App\Models\Accueil;
+use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -20,7 +23,7 @@ class AccueilResource extends PostResource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema(self::getCmsFormSchema(hasCategories: false, hasTags: false, hasIllustration: false, hasBuilder: false, customFields: []));
+            ->schema(self::getCmsFormSchema(hasCategories: false, hasTags: false, hasIllustration: false, hasBuilder: true, customFields: []));
     }
 
     public static function table(Table $table): Table

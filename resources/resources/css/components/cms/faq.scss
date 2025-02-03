@@ -1,0 +1,151 @@
+.cms-faq{
+    @apply
+    g-container-small
+    py-5
+    flex
+    flex-col
+    gap-5;
+}
+
+.cms-faq__title{
+    @apply
+    flex
+    items-center
+    gap-2
+    text-3xl
+    font-mollges
+    text-pr-main-l;
+
+    > .icon{
+        @apply
+        w-10
+        h-10;
+    }
+
+    > .text{
+        @apply
+        pt-2;
+    }
+}
+
+.cms-faq__content{
+    @apply
+    text-xl
+    text-pr-main-m
+    font-light;
+}
+
+.cms-faq__questions{
+    @apply
+    flex
+    flex-col
+    gap-3;
+}
+
+.cms-faq__question{
+    @apply
+    bg-white
+    pr-5
+    rounded-lg;
+
+    &[open]{
+        > .head{
+
+            >.icon{
+                @apply
+                bg-pr-third-m/50;
+
+                &::after{
+                    @apply
+                    opacity-0;
+                }
+            }
+        }
+    }
+
+    > .body{
+        @apply
+        cms-generic-content
+        flex
+        flex-col
+        gap-3
+        p-5
+        pt-0
+        text-pr-main-m
+        font-light;
+
+        h2, h3{
+            @apply
+            px-2
+            py-px
+            font-semibold
+            w-fit
+            rounded-md
+            font-nunito
+            text-xl;
+        }
+
+        h2{
+            @apply
+            text-white
+            bg-pr-main-m;
+        }
+
+        h3{
+            @apply
+            text-pr-main-d
+            bg-pr-main-l;
+        }
+    }
+}
+
+.cms-faq__question__head{
+    @apply
+    flex
+    items-center
+    justify-between
+    p-5
+    gap-5
+    text-xl
+    font-extrabold
+    text-pr-main-m
+    cursor-pointer;
+
+    @apply
+    md:text-2xl;
+
+    > .icon{
+        @apply
+        relative
+        block
+        w-6
+        h-6
+        shrink-0
+        rounded-full
+        bg-pr-second-m;
+
+        &::before, &::after{
+            content: '';
+
+            @apply
+            absolute
+            bg-white
+            top-1/2
+            left-1/2
+            -translate-x-1/2
+            -translate-y-1/2;
+        }
+
+        &::before{
+            @apply
+            h-1
+            w-3;
+        }
+
+        &::after{
+            @apply
+            h-3
+            w-1;
+        }
+    }
+}

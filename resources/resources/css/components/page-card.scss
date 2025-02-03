@@ -1,0 +1,89 @@
+.cms-page-card{
+    @apply
+    relative
+    flex
+    flex-1
+    items-center
+    justify-center
+    max-h-[600px]
+    min-h-[300px];
+
+    &.-main-l, &.-second-m{
+        .picture{
+            @apply
+            mix-blend-luminosity;
+        }
+
+        &::before{
+            @apply
+            hidden;
+        }
+    }
+
+    &.-main-l{
+        @apply
+        bg-pr-main-l;        
+    }
+
+    &.-main-m{
+        @apply
+        bg-pr-main-m;        
+    }
+
+    &.-second-m{
+        @apply
+        bg-pr-second-m;
+    }
+
+    &::before{
+        content: '';
+        
+        @apply
+        absolute
+        inset-0
+        z-10
+        bg-gradient-to-b
+        from-transparent
+        via-transparent
+        to-pr-main-m/70;
+    }
+}
+
+.cms-page-card__content{
+    @apply
+    absolute
+    top-1/2
+    left-1/2
+    -translate-x-1/2
+    -translate-y-1/2
+    flex
+    flex-col
+    items-center
+    gap-4
+    z-20;
+
+    > .title{
+        
+        &.-over-standard{
+            > .light, > .dark{
+                @apply
+                text-white;
+            }
+        }
+    }
+}
+
+.cms-page-card__image{
+    @apply
+    w-full
+    h-full
+    max-h-[600px]
+    overflow-hidden;
+
+    > .picture{
+        @apply
+        w-full
+        h-full
+        object-cover;
+    }
+}

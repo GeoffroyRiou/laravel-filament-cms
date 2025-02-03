@@ -1,0 +1,103 @@
+.cms-value, .cms-value__testimony{
+    @apply
+    bg-white;
+
+
+    &.-main-l{
+        @apply
+        bg-pr-main-l;
+    }
+
+    &.-main-m{
+        @apply
+        bg-pr-main-m;
+    }
+
+    &.-main-lr{
+        @apply
+        bg-pr-main-lr;
+    }
+
+    &.-second-l{
+        @apply
+        bg-pr-second-l;
+    }
+}
+
+.cms-value{
+    
+    @apply
+    flex
+    flex-col;
+
+    @apply
+    md:flex-row;
+
+    &.-reverse{
+        @apply
+        md:flex-row-reverse;
+    }
+}
+
+.cms-value__testimony, .cms-value__content{
+    @apply
+    md:max-w-[50%]
+    md:flex-1;
+}
+
+.cms-value__testimony{
+    @apply
+    flex
+    items-center
+    justify-center
+    p-10;
+
+    @apply
+    lg:p-24;
+}
+
+.cms-value__content{
+    @apply
+    flex
+    items-center
+    justify-center
+    py-5;
+
+    @apply
+    md:py-24;
+
+    &.-main-d > .text{
+        @apply
+        text-white;
+    }
+
+    &.-reverse{
+        @apply
+        order-1;
+    }
+
+    > .inner{
+        @apply
+        g-container
+        flex
+        flex-col
+        gap-5;
+
+        > .text{
+            @apply
+            cms-generic-content
+            mx-auto
+            max-w-[500px]
+            text-pr-main-d;
+    
+            @apply
+            md:mx-0;
+        
+            &.-over-main-m{
+                @apply
+                text-white;
+            }
+        }
+    }
+    
+}

@@ -1,0 +1,15 @@
+.g-schedules{
+    @apply
+    inline-flex
+    px-3
+    rounded-md
+    text-pr-main-d
+    font-semibold
+    text-lg
+    bg-white;
+
+    @apply
+    md:py-1
+    md:px-5
+    md:text-2xl;
+}

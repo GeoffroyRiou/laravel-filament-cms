@@ -1,0 +1,25 @@
+.page-header{
+    @apply
+    py-11
+    px-5
+    bg-pr-second-l;
+
+    @apply
+    md:py-24;
+    
+    > .title{
+        @apply
+        font-mollges
+        text-4xl
+        text-pr-main-m
+        text-center;
+
+        @apply
+        lg:text-[4rem]
+        lg:leading-[3.5rem];
+
+        @apply
+        xl:text-[5rem]
+        xl:leading-[4.5rem];
+    }
+}

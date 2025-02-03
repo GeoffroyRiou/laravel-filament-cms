@@ -1,0 +1,129 @@
+.cms-articles-list{
+    @apply
+    py-5;
+
+    > .inner{
+        @apply
+        g-container-small;
+    }
+}
+
+.articles-list{
+ 
+    @apply
+    flex
+    flex-col
+    gap-10;
+  }
+  
+  .articles-list__filters{
+  
+      @apply
+      flex
+      flex-col
+      gap-3;
+  
+      @apply
+      lg:flex-row
+      lg:justify-center
+      lg:gap-8;
+
+      > .head{
+        @apply
+        flex
+        items-center
+        gap-2;
+
+        > .icon{
+            @apply
+            w-5
+            h-5
+            fill-pr-main-d;
+        }
+  
+        > .label{
+            @apply
+            flex
+            gap-2
+            font-bold
+            text-pr-main-d;
+
+            &::before{
+                content: '|';
+            }
+        }
+
+      }
+  
+      > .filters{
+          @apply
+          flex
+          items-center
+          flex-wrap
+          gap-2;
+      }
+  }
+  
+  .articles-list__filters__filter{
+    @apply
+    w-fit
+    px-3
+    py-1
+    bg-white
+    text-pr-third-m
+    font-bold
+    text-sm
+    border
+    border-transparent
+    rounded;
+
+    @apply
+    xl:transition-colors;
+
+      &.-active{
+          @apply
+          bg-pr-main-d
+          text-white;
+      }
+  
+      &:hover:not(.-active){
+          @apply
+          xl:bg-pr-main-l
+          xl:text-pr-main-d;
+      }
+  }
+
+  .articles-list__filters__reset{
+    @apply
+    w-fit
+    underline
+    text-pr-main-d
+    italic;
+  }
+  
+  .articles-list__articles{
+      @apply
+      flex
+      flex-col
+      gap-5;
+  
+      @apply
+      sm:grid
+      sm:grid-cols-2; 
+  
+      @apply
+      md:grid-cols-3;   
+  
+      > .empty{
+          @apply
+          text-2xl
+          text-center
+          text-pr-main-l;
+      }
+
+  }
+
+  .articles-list__more{
+    @apply
+    text-center;
+  }

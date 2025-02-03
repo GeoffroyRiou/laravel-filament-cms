@@ -1,0 +1,11 @@
+.title-baseline{
+    @apply
+    text-sm
+    uppercase
+    font-light
+    tracking-widest
+    text-pr-main-m;
+
+    @apply
+    md:text-base;
+}

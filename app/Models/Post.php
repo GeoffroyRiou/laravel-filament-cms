@@ -30,15 +30,19 @@ class Post extends Model
         'slug',
         'model',
         'statut',
+        'excerpt',
+        'illustration',
         'contenu',
         'custom',
         'media_library_file_id',
         'order',
+        'private',
     ];
 
     public $translatable = [
         'titre',
         'slug',
+        'excerpt',
         'contenu',
         'custom',
     ];
@@ -61,8 +65,8 @@ class Post extends Model
      */
     protected static function booted(): void
     {
-        static::creating(fn (self $post) => self::updateMandatoryDataBeforeSave($post));
-        static::updating(fn (self $post) => self::updateMandatoryDataBeforeSave($post));
+        static::creating(fn(self $post) => self::updateMandatoryDataBeforeSave($post));
+        static::updating(fn(self $post) => self::updateMandatoryDataBeforeSave($post));
     }
 
     /**
@@ -79,13 +83,6 @@ class Post extends Model
     public function scopePublished(Builder $query): void
     {
         $query->where('statut', PostsStatus::Published->value);
-    }
-
-    /**
-     * Gère la relation avec l'ilustration
-     */
-    public function illustration(): BelongsTo {
-        return $this->belongsTo(MediaLibraryFile::class, 'media_library_file_id');
     }
 
     /**
@@ -116,15 +113,16 @@ class Post extends Model
         $params = [
             'slug' => $this->slug,
         ];
-        $routeStr = static::$routeSlug.'.single';
+        $routeStr = static::$routeSlug . '.single';
+        $categories =  $this->categories;
 
-        if (count($this->categories)) {
+        if (count($categories)) {
 
-            $currentCategorie = $this->categories[0];
+            $currentCategorie = $categories->first();
             $categoriesPath = '';
 
             while ($currentCategorie) {
-                $categoriesPath = "{$currentCategorie->getTranslation('slug', $locale)}/".$categoriesPath;
+                $categoriesPath = "{$currentCategorie->getTranslation('slug',$locale)}/" . $categoriesPath;
                 $currentCategorie = $currentCategorie->parent;
             }
 
@@ -132,7 +130,7 @@ class Post extends Model
             $routeStr .= '.hierarchical';
         }
 
-        return route($routeStr, $params).($addLocaleToUrl ? '?language='.$this->translationLocale : '');
+        return route($routeStr, $params) . ($addLocaleToUrl ? '?language=' . $this->translationLocale : '');
     }
 
     /**

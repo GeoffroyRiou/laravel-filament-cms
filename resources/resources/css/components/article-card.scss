@@ -1,0 +1,76 @@
+.article-card{
+    @apply
+    relative
+    bg-white
+    overflow-hidden
+    rounded-md
+    p-10
+    max-w-[370px];
+
+    > .content{
+        @apply
+        relative
+        z-10
+        flex
+        flex-col
+        gap-3
+        h-full;
+
+        > .title{
+            @apply
+            font-extrabold
+            text-pr-main-m
+            text-xl;
+        }
+
+        > .text{
+            @apply
+            text-sm
+            font-light
+            italic
+            text-pr-main-m;
+        }
+
+        > .button{
+            @apply
+            mb-0
+            mt-auto;
+        }
+    }
+    
+    > .grid{
+        @apply
+        absolute
+        top-0
+        left-0
+        -translate-x-[10%]
+        -translate-y-[20%]
+        w-[450px]
+        h-[450px]
+        fill-pr-second-m;
+    }
+}
+
+.article-card__categories{
+    @apply
+    absolute
+    top-0
+    left-0
+    p-1.5
+    w-full
+    flex
+    flex-wrap
+    gap-2;
+
+
+    > .category{
+        @apply
+        bg-white
+        font-bold
+        text-sm
+        text-pr-third-m
+        rounded-md
+        px-2
+        py-px;
+    }
+}

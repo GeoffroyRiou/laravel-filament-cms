@@ -1,0 +1,20 @@
+.title-lvl3 {
+    @apply
+    font-mollges
+    text-2xl
+    text-pr-main-d;
+
+    @apply
+    lg:text-[3rem]
+    lg:leading-[2.5rem];
+
+    &.-white{
+        @apply
+        text-white;
+    }
+
+    &.-main-l{
+        @apply
+        text-pr-main-l;
+    }
+}

@@ -1,0 +1,190 @@
+
+.g-header{
+    @apply
+    fixed
+    z-50
+    top-0
+    left-0
+    right-0;
+
+    &.-sticky{
+
+        @apply
+        xl:py-2
+        xl:bg-white;
+
+        > .inner > .firstrow{
+            @apply
+            hidden;
+        }
+    }
+}
+
+.g-header__row{
+
+
+    &.-firstrow{
+        @apply
+        hidden
+        bg-pr-main-d;
+
+        @apply
+        xl:block
+        xl:mb-14;
+
+        &.-sticky{
+            @apply
+            xl:hidden;
+        }
+
+        > .inner{
+            @apply
+            xl:py-3;
+        }
+    }
+
+    &.-secondrow{
+        @apply
+        bg-white;
+
+        @apply
+        xl:bg-transparent;
+
+        > .inner{
+            @apply
+            flex
+            px-0;
+
+            @apply
+            xl:px-5;
+        }
+    }
+
+    > .inner{
+        @apply
+        g-container
+        flex
+        items-center
+        justify-between;
+    }
+}
+
+.g-header__logo{
+    @apply
+    flex
+    items-center
+    flex-1
+    px-5;
+
+    @apply
+    xl:px-0
+    xl:flex-none;
+
+    &.-sticky{
+        > .small{
+            @apply
+            xl:block;
+        }
+        > .big{
+            @apply
+            xl:hidden;
+        }
+    }
+
+    > .small, > .big{
+        @apply
+        w-full;
+    }
+
+    > .small{
+        @apply
+        max-w-[190px];
+
+        @apply
+        xl:hidden;
+    }
+
+    > .big{
+        @apply
+        hidden
+        max-w-[325px];
+
+        @apply
+        xl:block;
+    }
+}
+
+.g-header__actions{
+    @apply
+    flex
+    items-center;
+
+    &.-mobile{
+        @apply
+        xl:hidden;        
+    }
+
+    &.-desktop{
+        @apply
+        hidden;   
+        
+        @apply
+        xl:gap-3
+        xl:flex;
+    }
+}
+
+.g-header__actions__action{
+    @apply
+    flex
+    flex-col
+    items-center
+    justify-center
+    p-5
+    h-16;
+
+    &.-medium{
+        @apply
+        bg-pr-main-m;
+
+        > .icon{
+            @apply
+            fill-white;
+        }
+    }
+
+    &.-light{
+        @apply
+        bg-pr-main-l;
+
+        > .text{
+            @apply
+            text-pr-main-d;
+        }
+
+        > .icon{
+            @apply
+            fill-pr-main-d;
+        }
+    }
+
+    > .text{
+        @apply
+        uppercase
+        font-extrabold
+        text-[.5rem]
+        leading-[.5rem]
+        text-pr-main-m;
+    }
+
+    > .icon{
+        @apply
+        w-6
+        h-6;
+
+        &.-burger{
+            @apply
+            h-3;
+        }
+    }
+}
