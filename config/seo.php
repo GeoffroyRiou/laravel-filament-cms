@@ -12,7 +12,7 @@ return [
     /**
      * Use this setting to specify the site name that will be used in OpenGraph tags.
      */
-    'site_name' => 'PAMO',
+    'site_name' => 'demo',
 
     /**
      * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
@@ -59,7 +59,7 @@ return [
      *
      * You can use the following filetypes: ico, png, gif, jpeg, svg.
      */
-    'favicon' => 'images/favicon.png',
+    'favicon' => '',
 
     'title' => [
         /**
@@ -91,7 +91,7 @@ return [
          * where we don't have a description set via an associated ->seo model or via
          * the ->getDynamicSEOData() method.
          */
-        'fallback' => 'Foncières, enseignes, commerçants. Ca fait 25 ans qu’on travaille à vos côtés ! Alors pour attirer et fidéliser vos clients, on imagine, on crée et on met en œuvre vos Plans d’Actions de Marketing Opérationnel. C\'est ça PAMO !',
+        'fallback' => '',
     ],
 
     'image' => [
@@ -101,7 +101,7 @@ return [
          * This should be a path to an image. The url to the path is generated using the `secure_url()` function
          * (`secure_url($yourProvidedPath)`), so make sure the image is accessible from the public folder.
          */
-        'fallback' => 'images/share-illustration.png',
+        'fallback' => '',
     ],
 
     'author' => [

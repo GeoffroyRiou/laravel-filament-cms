@@ -12,7 +12,7 @@ return [
     /**
      * Use this setting to specify the site name that will be used in OpenGraph tags.
      */
-    'site_name' => 'PAMO',
+    'site_name' => 'demo',
 
     /**
      * Use this setting to specify the path to the sitemap of your website. This exact path will outputted, so
@@ -91,7 +91,7 @@ return [
          * where we don't have a description set via an associated ->seo model or via
          * the ->getDynamicSEOData() method.
          */
-        'fallback' => 'Foncières, enseignes, commerçants. Ca fait 25 ans qu’on travaille à vos côtés ! Alors pour attirer et fidéliser vos clients, on imagine, on crée et on met en œuvre vos Plans d’Actions de Marketing Opérationnel. C\'est ça PAMO !',
+        'fallback' => 'Foncières, enseignes, commerçants. Ca fait 25 ans qu’on travaille à vos côtés ! Alors pour attirer et fidéliser vos clients, on imagine, on crée et on met en œuvre vos Plans d’Actions de Marketing Opérationnel. C\'est ça demo !',
     ],
 
     'image' => [

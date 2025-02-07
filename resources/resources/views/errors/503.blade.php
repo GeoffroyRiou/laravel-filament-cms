@@ -71,7 +71,7 @@
         <div>
             <p>On peaufine et on revient !</p>
             <p>&nbsp;</p>
-            <p><strong>Équipe PAMO</strong></p>
+            <p><strong>Équipe demo</strong></p>
         </div>
     </article>
 </body>

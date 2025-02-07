@@ -11,11 +11,11 @@ export default {
         'americane': ['Americane', 'sans-serif'],
       },
       colors : {
-        'pamo-noir' : '#00001C',
-        'pamo-jaune' : '#FFD527',
-        'pamo-rose' : '#FF3797',
-        'pamo-bleu' : '#2226F7',
-        'pamo-vert' : '#24D56D',
+        'demo-noir' : '#00001C',
+        'demo-jaune' : '#FFD527',
+        'demo-rose' : '#FF3797',
+        'demo-bleu' : '#2226F7',
+        'demo-vert' : '#24D56D',
       },
       boxShadow : {
         'jaune' : '-6px 0 0 #FFD527, 6px 0 0 #FFD527',
