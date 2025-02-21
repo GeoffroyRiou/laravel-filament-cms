@@ -4,12 +4,11 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\MediaLibraryFileResource\Pages;
 use App\Models\MediaLibraryFile;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 
@@ -28,37 +27,13 @@ class MediaLibraryFileResource extends Resource
     public static function form(Form $form): Form
     {
         return $form
-            ->schema([
-                TextInput::make('nom')
-                    ->required()
-                    ->columnSpan(2),
-                SpatieMediaLibraryFileUpload::make('file')
-                    ->collection('media_files')->columnSpan(2),
-            ]);
+            ->schema([]);
     }
 
     public static function table(Table $table): Table
     {
         return $table
-            ->columns([
-                SpatieMediaLibraryImageColumn::make('file')
-                    ->collection('media_files')
-                    ->conversion('thumbnail')
-                    ->circular(),
-                TextColumn::make('nom'),
-            ])
-            ->filters([
-                //
-            ])
-            ->actions([
-                Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
-            ])
-            ->bulkActions([
-                Tables\Actions\BulkActionGroup::make([
-                    Tables\Actions\DeleteBulkAction::make(),
-                ]),
-            ]);
+            ->columns([]);
     }
 
     public static function getRelations(): array
@@ -71,7 +46,7 @@ class MediaLibraryFileResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListMediaLibraryFiles::route('/'),
+            'index' => Pages\MediaLibraryPage::route('/'),
             'create' => Pages\CreateMediaLibraryFile::route('/create'),
             'edit' => Pages\EditMediaLibraryFile::route('/{record}/edit'),
         ];
