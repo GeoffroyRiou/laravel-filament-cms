@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Filament\Blocks;
+namespace App\Filament\Blocks\CMSSelects;
 
 use App\Models\ContactForm;
 use Filament\Forms\Components\Select;
 
-class ContactFormSelect extends Select
+class FormSelect extends Select
 {
     protected function setUp(): void
     {

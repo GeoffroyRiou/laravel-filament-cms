@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Blocks;
+namespace App\Filament\Blocks\CMSSelects;
 
 use Filament\Forms\Components\Select;
 
-class CMSPageFormSelect extends Select
+class PostSelect extends Select
 {
     public function generateOptions(string $model): self
     {
