@@ -2,8 +2,7 @@
 
 namespace App\Filament\Blocks\CMSSchemas;
 
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\TextInput;
+use App\Forms\Components\MediaFileField;
 
 class ImageSchema
 {
@@ -12,11 +11,9 @@ class ImageSchema
         string $label = 'Image',
     ): array {
         return [
-            FileUpload::make($prefix.'image')
-                ->label($label)
-                ->image()
-                ->maxSize(5120),
-            TextInput::make('alt')->label('Texte alternatif')->required()
+            MediaFileField::make($prefix . 'image')
+                ->imagesOnly(true)
+                ->label($label),
         ];
     }
 }

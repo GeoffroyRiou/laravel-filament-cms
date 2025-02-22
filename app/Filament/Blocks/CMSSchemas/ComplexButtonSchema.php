@@ -6,6 +6,7 @@ namespace App\Filament\Blocks\CMSSchemas;
 
 use App\Filament\Blocks\CMSSelects\IconSelect;
 use App\Filament\Blocks\CMSSelects\PostSelect;
+use App\Forms\Components\MediaFileField;
 use App\Models\Page;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Section;
@@ -31,30 +32,24 @@ class ComplexButtonSchema
                 ->options([
                     'page' => 'Page du site',
                     'customLink' => 'Lien personnalisé',
-                    'file' => 'Fichier public',
-                    'filePrivate' => 'Fichier privé',
+                    'file' => 'Fichier',
                 ])
                 ->required()
                 ->inline()
                 ->live(),
             PostSelect::make($prefix . 'post')
                 ->label('Page')
-                ->generateOptions(Page::class)
+                ->generateOptions($postModel)
                 ->visible(fn(Get $get): bool => $get('type') == 'page'),
             TextInput::make('link')
                 ->label('Lien')
                 ->url()
                 ->required()
                 ->visible(fn(Get $get): bool => $get('type') == 'customLink'),
-            FileUpload::make('file')
+            MediaFileField::make('file')
                 ->label('Fichier public')
                 ->maxSize(1024 * 5)
                 ->visible(fn(Get $get): bool => $get('type') == 'file'),
-            FileUpload::make('filePrivate')
-                ->label('Fichier privé')
-                ->maxSize(1024 * 5)
-                ->disk('private')
-                ->visible(fn(Get $get): bool => $get('type') == 'filePrivate'),
             TextInput::make('label')
                 ->label('Intitulé du bouton')
                 ->required(),

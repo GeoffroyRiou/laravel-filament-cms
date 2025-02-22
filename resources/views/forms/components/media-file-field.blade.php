@@ -6,7 +6,7 @@
             @php($mediaFile = $getMediaFile())
             @if ($mediaFile)
                 <div style="width: fit-content">
-                    <x-admin-file-preview :mediaFile="$mediaFile" />
+                    <x-medialibrary.admin-preview :mediaFile="$mediaFile" />
                 </div>
             @endif
         </div>

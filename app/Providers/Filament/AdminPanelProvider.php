@@ -70,11 +70,11 @@ class AdminPanelProvider extends PanelProvider
                         ->defaultLocales(config('languages')),
                 ])
                 ->navigationGroups([
-                    // Articles non utilisés sur ce site
-                    //NavigationGroup::make()
-                    // ->label('Articles')
-                    // ->icon('heroicon-o-pencil')
-                    // ->collapsed(),
+
+                    NavigationGroup::make()
+                        ->label('Articles')
+                        ->icon('heroicon-o-pencil')
+                        ->collapsed(),
 
                     NavigationGroup::make()
                         ->label('Pages')

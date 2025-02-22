@@ -18,13 +18,15 @@ class MediaFileField extends Field
 
     public bool $filesOnly = false;
 
+    public ?int $maxSize = null;
+
     protected function setUp(): void
     {
         parent::setUp();
 
         $this->registerActions([
-            fn (self $component): Action => $component->getPickerAction(),
-            fn (self $component): Action => $component->getUploadAction(),
+            fn(self $component): Action => $component->getPickerAction(),
+            fn(self $component): Action => $component->getUploadAction(),
         ]);
     }
 
@@ -38,6 +40,13 @@ class MediaFileField extends Field
     public function filesOnly(bool $filesOnly = false): static
     {
         $this->filesOnly = $filesOnly;
+
+        return $this;
+    }
+
+    public function maxSize(int $maxSize): static
+    {
+        $this->maxSize = $maxSize;
 
         return $this;
     }
@@ -59,17 +68,17 @@ class MediaFileField extends Field
             ->label('Sélectionner un fichier')
             ->icon('heroicon-o-photo')
             ->form([
-                MediaFilePicker::make('image')
+                MediaFilePicker::make('file')
                     ->imagesOnly($this->imagesOnly)
                     ->filesOnly($this->filesOnly),
             ])
-            ->fillForm(fn (Component $component): array => [
-                'image' => $component->getState(),
+            ->fillForm(fn(Component $component): array => [
+                'file' => $component->getState(),
             ])
             ->action(function (array $data, Set $set, Component $component) {
                 $set(
                     $component->getStatePath(false),
-                    $data['image']
+                    $data['file']
                 );
             });
     }
@@ -85,14 +94,15 @@ class MediaFileField extends Field
                     ->columnSpan(2),
                 FileUpload::make('file')
                     ->label('Fichier')
-                    ->required(),
+                    ->required()
+                    ->maxSize($this->maxSize),
             ])
             ->action(function (array $data, Set $set, Component $component) {
 
                 $newMedia = MediaLibraryFile::create([
                     'nom' => $data['nom'],
                 ]);
-                $newMedia->addMedia(storage_path('app/public/'.$data['file']))->toMediaCollection('media_files');
+                $newMedia->addMedia(storage_path('app/public/' . $data['file']))->toMediaCollection('media_files');
 
                 $set(
                     $component->getStatePath(false),

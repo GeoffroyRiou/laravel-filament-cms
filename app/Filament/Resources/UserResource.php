@@ -4,6 +4,8 @@ namespace App\Filament\Resources;
 
 use App\Enums\UserRoles;
 use App\Filament\Resources\UserResource\Pages;
+use App\Forms\Components\MediaFileField;
+use App\Forms\Components\MediaFilePicker;
 use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
@@ -41,12 +43,12 @@ class UserResource extends Resource
                     ->afterStateHydrated(function (TextInput $component) {
                         $component->state('');
                     })
-                    ->dehydrateStateUsing(fn ($state) => Hash::make($state))
-                    ->dehydrated(fn ($state) => filled($state))
-                    ->required(fn (string $context): bool => $context === 'create')
+                    ->dehydrateStateUsing(fn($state) => Hash::make($state))
+                    ->dehydrated(fn($state) => filled($state))
+                    ->required(fn(string $context): bool => $context === 'create')
                     ->autocomplete('new-password') // "new-XXX" force chrome à ne pas autocompléter le champ
                     ->revealable(),
-                Select::make('role')->label('Rôle')->options(fn () => getAllEnumValues(UserRoles::cases())),
+                Select::make('role')->label('Rôle')->options(fn() => getAllEnumValues(UserRoles::cases())),
             ]);
     }
 

@@ -32,21 +32,14 @@ class MediaFilePicker extends Field
     {
         $medias = MediaLibraryFile::all();
 
-        $mediasCollection = new Collection();
-        /**
-         * TODO : A améliorer en mettant la condition directement dans la query
-         */
-        foreach ($medias as $media) {
-
-            if (
+        $medias = $medias->filter(function (MediaLibraryFile $media) {
+            return (
                 (! $this->imagesOnly && ! $this->filesOnly) || // Pas de limitations
                 ($this->imagesOnly && $media->isImage()) || // image seulement
                 ($this->filesOnly && ! $media->isImage())     // fichier seulement
-            ) {
-                $mediasCollection->add($media);
-            }
-        }
+            );
+        });
 
-        return $mediasCollection;
+        return $medias;
     }
 }
