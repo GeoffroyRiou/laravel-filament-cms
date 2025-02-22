@@ -92,7 +92,7 @@ class AdminPanelProvider extends PanelProvider
                         ->collapsed(),
 
                     NavigationGroup::make()
-                        ->label('Divers')
+                        ->label('Media')
                         ->icon('heroicon-o-rectangle-group')
                         ->collapsed(),
 
@@ -119,9 +119,9 @@ class AdminPanelProvider extends PanelProvider
                 ->sidebarCollapsibleOnDesktop();
         } catch (\Exception $e) {
             return $panel
-            ->default()
-            ->id('admin')
-            ->path('admin');
+                ->default()
+                ->id('admin')
+                ->path('admin');
         }
     }
 }

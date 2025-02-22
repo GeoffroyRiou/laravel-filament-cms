@@ -29,10 +29,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
 
-        FilamentAsset::register([
-            Css::make('media-library', __DIR__ . '/../../resources/filament/css/media-library.css'),
-        ]);
-
         if (!$this->app->environment('local')) {
             URL::forceScheme('https');
         }

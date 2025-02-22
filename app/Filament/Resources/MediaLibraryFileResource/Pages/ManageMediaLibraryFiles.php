@@ -4,16 +4,16 @@ namespace App\Filament\Resources\MediaLibraryFileResource\Pages;
 
 use App\Filament\Resources\MediaLibraryFileResource;
 use Filament\Actions;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Resources\Pages\ManageRecords;
 
-class EditMediaLibraryFile extends EditRecord
+class ManageMediaLibraryFiles extends ManageRecords
 {
     protected static string $resource = MediaLibraryFileResource::class;
 
     protected function getHeaderActions(): array
     {
         return [
-            Actions\DeleteAction::make(),
+            Actions\CreateAction::make(),
         ];
     }
 }
