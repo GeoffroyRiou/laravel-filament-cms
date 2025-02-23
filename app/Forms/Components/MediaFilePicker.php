@@ -5,6 +5,7 @@ namespace App\Forms\Components;
 use App\Models\MediaLibraryFile;
 use Filament\Forms\Components\Field;
 use Illuminate\Database\Eloquent\Collection;
+use Livewire\Attributes\On;
 
 class MediaFilePicker extends Field
 {
@@ -27,6 +28,7 @@ class MediaFilePicker extends Field
 
         return $this;
     }
+
 
     public function getMediaFiles(): Collection
     {

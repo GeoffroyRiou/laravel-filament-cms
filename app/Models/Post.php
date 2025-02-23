@@ -31,7 +31,6 @@ class Post extends Model
         'model',
         'statut',
         'excerpt',
-        'illustration',
         'contenu',
         'custom',
         'media_library_file_id',

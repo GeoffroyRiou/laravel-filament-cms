@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Enums\PostsStatus;
 use App\Filament\Blocks\CMSField;
+use App\Filament\Blocks\CMSSchemas\ImageSchema;
 use App\Filament\Resources\PostResource\Pages;
 use App\Forms\Components\MediaFileField;
 use App\Models\Post;
@@ -73,11 +74,9 @@ class PostResource extends Resource
         ];
 
         if ($hasIllustration) {
-            $mainFields[] = FileUpload::make('illustration')
-                ->label('Illustration')
-                ->image()
-                ->maxSize(5120)
-                ->columnSpan(2);
+            $mainFields[] = MediaFileField::make('illustration')
+                ->imagesOnly(true)
+                ->label('Illustration');
         }
 
         $sidebarFields = [

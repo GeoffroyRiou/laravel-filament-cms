@@ -18,8 +18,10 @@ return new class extends Migration
         Schema::create('posts', function (Blueprint $table) {
             $table->id();
             $table->string('titre');
+            $table->text('excerpt');
             $table->string('slug');
             $table->string('model');
+            $table->boolean('private')->default(false);
             $table->enum('statut', array_map(fn($case) => $case->value, PostsStatus::cases()));
             $table->foreignId('media_library_file_id')->nullable();
             $table->json('contenu')->nullable();

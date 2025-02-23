@@ -9,6 +9,8 @@ use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
+use Illuminate\Support\Collection;
+use Livewire\Attributes\On;
 
 class MediaFileField extends Field
 {
@@ -18,7 +20,7 @@ class MediaFileField extends Field
 
     public bool $filesOnly = false;
 
-    public ?int $maxSize = null;
+    public ?int $maxSize = 5 * 1024;
 
     protected function setUp(): void
     {
@@ -78,7 +80,7 @@ class MediaFileField extends Field
             ->action(function (array $data, Set $set, Component $component) {
                 $set(
                     $component->getStatePath(false),
-                    $data['file']
+                    $data['file'][0]
                 );
             });
     }
@@ -89,20 +91,19 @@ class MediaFileField extends Field
             ->label('Téléverser un fichier')
             ->icon('heroicon-o-photo')
             ->form([
-                TextInput::make('nom')
+                TextInput::make('name')
                     ->required()
                     ->columnSpan(2),
-                FileUpload::make('file')
+                FileUpload::make('path')
                     ->label('Fichier')
                     ->required()
                     ->maxSize($this->maxSize),
             ])
             ->action(function (array $data, Set $set, Component $component) {
-
                 $newMedia = MediaLibraryFile::create([
-                    'nom' => $data['nom'],
+                    'name' => $data['name'],
+                    'path' => $data['path'],
                 ]);
-                $newMedia->addMedia(storage_path('app/public/' . $data['file']))->toMediaCollection('media_files');
 
                 $set(
                     $component->getStatePath(false),
