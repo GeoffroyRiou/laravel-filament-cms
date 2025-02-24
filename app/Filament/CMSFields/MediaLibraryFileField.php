@@ -12,7 +12,7 @@ use Filament\Forms\Set;
 
 class MediaLibraryFileField extends Field
 {
-    protected string $view = 'forms.components.media-file-field';
+    protected string $view = 'cms.fields.media-library-file-field';
 
     public bool $imagesOnly = false;
 
@@ -69,6 +69,7 @@ class MediaLibraryFileField extends Field
             ->icon('heroicon-o-photo')
             ->form([
                 MediaLibraryFilePicker::make('file')
+                    ->label('')
                     ->imagesOnly($this->imagesOnly)
                     ->filesOnly($this->filesOnly),
             ])

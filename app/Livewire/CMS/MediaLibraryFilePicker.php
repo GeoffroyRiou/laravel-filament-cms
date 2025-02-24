@@ -1,10 +1,9 @@
 <?php
 
-namespace App\Livewire;
+namespace App\Livewire\CMS;
 
 use App\Models\MediaLibraryFile;
 use Illuminate\Pagination\LengthAwarePaginator;
-use Illuminate\Support\Collection;
 use Livewire\Attributes\Modelable;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -44,7 +43,7 @@ class MediaLibraryFilePicker extends Component
     }
     public function render()
     {
-        return view('livewire.media-library-file-picker', [
+        return view('livewire.cms.media-library-file-picker', [
             'mediaFiles' => $this->getMediaFiles()
         ]);
     }
