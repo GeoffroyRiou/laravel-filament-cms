@@ -13,7 +13,8 @@ class ImageSchema
         return [
             MediaFileField::make($prefix . 'image')
                 ->imagesOnly(true)
-                ->label($label),
+                ->label($label)
+                ->reactive(),
         ];
     }
 }
