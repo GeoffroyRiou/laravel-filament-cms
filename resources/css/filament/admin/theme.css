@@ -1,0 +1,89 @@
+@import '../../../../vendor/filament/filament/resources/css/theme.css';
+
+@config 'tailwind.config.js';
+
+
+.media-library__field{
+    @apply
+    flex
+    flex-col
+    gap-5;
+
+    > .actions{
+        @apply
+        flex
+        items-center
+        gap-3
+        text-sm;
+    }
+}
+
+.media-library__list{
+    @apply
+    flex
+    flex-col
+    gap-5;
+    
+    > .list{
+        @apply
+        grid
+        grid-cols-5
+        gap-3;
+    }
+
+    > .pagination{
+        @apply
+        flex
+        gap-3;
+    }
+}
+
+.media-library__card{
+    @apply 
+    border
+    rounded-lg
+    cursor-pointer
+    min-h-[100px];
+
+    &.-alone{
+        @apply
+        min-w-[150px]
+        cursor-default;
+    }
+
+    &.-active{
+        @apply
+        border-2
+        border-sky-500;
+    }
+
+    > .preview{
+        @apply
+        flex
+        justify-center
+        items-center
+        h-36
+        bg-slate-100
+        rounded-lg
+        w-full;
+
+        svg{
+            @apply
+            w-20
+            h-20
+            opacity-30;
+        }
+    }
+
+    > .caption{
+        @apply
+        border-t
+        block
+        text-center
+        px-2
+        py-1
+        text-xs
+        text-slate-600
+        italic;
+    }
+}

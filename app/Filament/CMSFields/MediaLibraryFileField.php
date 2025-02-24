@@ -88,7 +88,7 @@ class MediaLibraryFileField extends Field
     {
         return Action::make('upload')
             ->label('Téléverser un fichier')
-            ->icon('heroicon-o-photo')
+            ->icon('heroicon-o-arrow-up-on-square')
             ->form([
                 TextInput::make('name')
                     ->required()

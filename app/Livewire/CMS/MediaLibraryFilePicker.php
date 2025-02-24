@@ -6,16 +6,20 @@ use App\Models\MediaLibraryFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Modelable;
 use Livewire\Component;
+use Livewire\WithoutUrlPagination;
 use Livewire\WithPagination;
 
 class MediaLibraryFilePicker extends Component
 {
 
-    use WithPagination;
+    use WithPagination, WithoutUrlPagination;
 
     public bool $imagesOnly = false;
 
     public bool $filesOnly = false;
+
+    public int | string $perPage = 1;
+    
 
     #[Modelable] // Lien avec la propriété wire:model à l'appel du composant
     public string $mediaFileId = '';
@@ -29,7 +33,7 @@ class MediaLibraryFilePicker extends Component
 
     public function getMediaFiles(): LengthAwarePaginator
     {
-        $medias = MediaLibraryFile::paginate(3);
+        $medias = MediaLibraryFile::paginate($this->perPage);
 
         /*$medias = $medias->filter(function (MediaLibraryFile $media) {
             return (

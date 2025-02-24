@@ -2,16 +2,16 @@
     state: $wire.$entangle('{{ $getStatePath() }}'),
 }"
 x-on:media-file-selected="state = $event.detail[0] || '';">
-    <div>
+    <div class="media-library__field">
         <div x-show="state">
             @php($mediaFile = $getMediaFile())
             @if ($mediaFile)
                 <div style="width: fit-content">
-                    <x-medialibrary.admin-preview :mediaFile="$mediaFile" />
+                    <x-medialibrary.admin-preview :mediaFile="$mediaFile" class="-alone"/>
                 </div>
             @endif
         </div>
-        <div class="p-2">
+        <div class="actions">
             {{ $getAction('picker') }} ou {{ $getAction('upload') }}
         </div>
     </div>
