@@ -14,6 +14,7 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Grid;
+use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
@@ -47,10 +48,15 @@ class MediaLibraryFileResource extends Resource
     {
         return $table
             ->columns([
-                MediaLibraryFilePreviewColumn::make('path'),
+                Grid::make()->schema([
+                    Stack::make([
+
+                        MediaLibraryFilePreviewColumn::make('path'),
                         TextColumn::make('name')
                             ->label('Nom')
                             ->searchable(),
+                    ]),
+                ])
             ])
             ->contentGrid(['sm' => 2, 'md' => 3,])
             ->filters([

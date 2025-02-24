@@ -1,1 +1,1 @@
-<x-medialibrary.admin-preview :mediaFile="$getRecord()" :hideCaption="true" />
+<x-medialibrary.admin-preview :mediaFile="$getRecord()" :hideCaption="true" class="-column" />
