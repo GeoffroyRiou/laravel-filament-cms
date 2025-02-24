@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Blocks\CMSSelects;
+namespace App\Filament\CMSFields;
 
 use App\Models\ContactForm;
 use Filament\Forms\Components\Select;

@@ -5,6 +5,7 @@ namespace App\Livewire;
 use App\Models\MediaLibraryFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Livewire\Attributes\Modelable;
 use Livewire\Component;
 use Livewire\WithPagination;
 
@@ -17,14 +18,13 @@ class MediaLibraryFilePicker extends Component
 
     public bool $filesOnly = false;
 
+    #[Modelable] // Lien avec la propriété wire:model à l'appel du composant
     public string $mediaFileId = '';
 
 
     public function selectMediaFile(string $mediaFileId): void
     {
         $this->mediaFileId = $mediaFileId;
-
-        $this->dispatch('media-file-selected', $mediaFileId);
     }
 
 

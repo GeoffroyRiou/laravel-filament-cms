@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Blocks\CMSBlocks;
+namespace App\Filament\CMSBlocks;
 
-use App\Filament\Blocks\CMSSchemas\ImageSchema;
+use App\Filament\CMSSchemas\ImageSchema;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\TextInput;

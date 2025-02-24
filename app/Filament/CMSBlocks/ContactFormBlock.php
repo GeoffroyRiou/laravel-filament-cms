@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Blocks\CMSBlocks;
+namespace App\Filament\CMSBlocks;
 
-use App\Filament\Blocks\CMSSelects\FormSelect;
+use App\Filament\CMSFields\FormSelect;
 use Filament\Forms\Components\Builder\Block;
 
 class ContactFormBlock

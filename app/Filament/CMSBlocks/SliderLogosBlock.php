@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Blocks\CMSBlocks;
+namespace App\Filament\CMSBlocks;
 
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Repeater;

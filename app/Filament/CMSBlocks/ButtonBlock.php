@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Blocks\CMSBlocks;
+namespace App\Filament\CMSBlocks;
 
-use App\Filament\Blocks\CMSSchemas\ComplexButtonSchema;
+use App\Filament\CMSSchemas\ComplexButtonSchema;
 use Filament\Forms\Components\Builder\Block;
 
 class ButtonBlock

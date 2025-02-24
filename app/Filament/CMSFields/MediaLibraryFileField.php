@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Forms\Components;
+namespace App\Filament\CMSFields;
 
 use App\Models\MediaLibraryFile;
 use Filament\Forms\Components\Actions\Action;
@@ -9,10 +9,8 @@ use Filament\Forms\Components\Field;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Set;
-use Illuminate\Support\Collection;
-use Livewire\Attributes\On;
 
-class MediaFileField extends Field
+class MediaLibraryFileField extends Field
 {
     protected string $view = 'forms.components.media-file-field';
 
@@ -70,7 +68,7 @@ class MediaFileField extends Field
             ->label('Sélectionner un fichier')
             ->icon('heroicon-o-photo')
             ->form([
-                MediaFilePicker::make('file')
+                MediaLibraryFilePicker::make('file')
                     ->imagesOnly($this->imagesOnly)
                     ->filesOnly($this->filesOnly),
             ])

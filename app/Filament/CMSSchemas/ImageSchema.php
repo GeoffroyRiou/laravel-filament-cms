@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Filament\Blocks\CMSSchemas;
+namespace App\Filament\CMSSchemas;
 
-use App\Forms\Components\MediaFileField;
+use App\Filament\CMSFields\MediaLibraryFileField;
 
 class ImageSchema
 {
@@ -11,10 +11,10 @@ class ImageSchema
         string $label = 'Image',
     ): array {
         return [
-            MediaFileField::make($prefix . 'image')
+            MediaLibraryFileField::make($prefix . 'image')
                 ->imagesOnly(true)
                 ->label($label)
-                ->reactive(),
+                ->live(),
         ];
     }
 }

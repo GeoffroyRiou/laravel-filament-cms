@@ -2,14 +2,12 @@
 
 declare(strict_types=1);
 
-namespace App\Filament\Blocks\CMSSchemas;
+namespace App\Filament\CMSSchemas;
 
-use App\Filament\Blocks\CMSSelects\IconSelect;
-use App\Filament\Blocks\CMSSelects\PostSelect;
-use App\Forms\Components\MediaFileField;
+use App\Filament\CMSFields\IconSelect;
+use App\Filament\CMSFields\PostSelect;
+use App\Filament\CMSFields\MediaLibraryFileField;
 use App\Models\Page;
-use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\ToggleButtons;
@@ -46,7 +44,7 @@ class ComplexButtonSchema
                 ->url()
                 ->required()
                 ->visible(fn(Get $get): bool => $get('type') == 'customLink'),
-            MediaFileField::make('file')
+            MediaLibraryFileField::make('file')
                 ->label('Fichier public')
                 ->maxSize(1024 * 5)
                 ->visible(fn(Get $get): bool => $get('type') == 'file'),

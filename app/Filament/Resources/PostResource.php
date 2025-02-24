@@ -3,13 +3,11 @@
 namespace App\Filament\Resources;
 
 use App\Enums\PostsStatus;
-use App\Filament\Blocks\CMSField;
-use App\Filament\Blocks\CMSSchemas\ImageSchema;
+use App\Filament\CMSFields\BlocksField;
 use App\Filament\Resources\PostResource\Pages;
-use App\Forms\Components\MediaFileField;
+use App\Filament\CMSFields\MediaLibraryFileField;
 use App\Models\Post;
 use CodeWithDennis\FilamentSelectTree\SelectTree;
-use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\Section;
@@ -74,7 +72,7 @@ class PostResource extends Resource
         ];
 
         if ($hasIllustration) {
-            $mainFields[] = MediaFileField::make('illustration')
+            $mainFields[] = MediaLibraryFileField::make('illustration')
                 ->imagesOnly(true)
                 ->label('Illustration');
         }
@@ -140,7 +138,7 @@ class PostResource extends Resource
                     $hasBuilder ?
                     Section::make('Contenu de la page')
                     ->schema([
-                        CMSField::make('contenu')
+                        BlocksField::make('contenu')
                             ->columnSpan(2)
                             ->collapsed()
                             ->collapsible()

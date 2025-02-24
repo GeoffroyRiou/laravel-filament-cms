@@ -1,13 +1,12 @@
 <?php
 
-namespace App\Forms\Components;
+namespace App\Filament\CMSFields;
 
 use App\Models\MediaLibraryFile;
 use Filament\Forms\Components\Field;
 use Illuminate\Database\Eloquent\Collection;
-use Livewire\Attributes\On;
 
-class MediaFilePicker extends Field
+class MediaLibraryFilePicker extends Field
 {
     protected string $view = 'forms.components.media-file-picker';
 

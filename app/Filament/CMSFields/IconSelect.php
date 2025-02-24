@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Filament\Blocks\CMSSelects;
+namespace App\Filament\CMSFields;
 
 use App\Enums\Icons;
 use Filament\Forms\Components\Select;

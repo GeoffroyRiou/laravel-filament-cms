@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Filament\Blocks\CMSBlocks;
+namespace App\Filament\CMSBlocks;
 
-use App\Filament\Blocks\CMSSchemas\ComplexButtonSchema;
-use App\Filament\Blocks\CMSSchemas\ImageSchema;
-use App\Filament\Blocks\CMSSchemas\PostButtonSchema;
+use App\Filament\CMSSchemas\ComplexButtonSchema;
+use App\Filament\CMSSchemas\ImageSchema;
+use App\Filament\CMSSchemas\PostButtonSchema;
 use Filament\Forms\Components\Builder\Block;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\TextInput;

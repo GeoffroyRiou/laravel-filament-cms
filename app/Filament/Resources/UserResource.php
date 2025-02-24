@@ -4,8 +4,6 @@ namespace App\Filament\Resources;
 
 use App\Enums\UserRoles;
 use App\Filament\Resources\UserResource\Pages;
-use App\Forms\Components\MediaFileField;
-use App\Forms\Components\MediaFilePicker;
 use App\Models\User;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\TextInput;
