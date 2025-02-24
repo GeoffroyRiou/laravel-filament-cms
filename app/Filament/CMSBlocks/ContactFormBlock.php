@@ -9,7 +9,7 @@ class ContactFormBlock
 {
     public static function make(): Block
     {
-        return Block::make('formulaire')
+        return Block::make('cms-blocks.contact-form')
             ->label('Formulaire de contact')
             ->icon('heroicon-o-envelope')
             ->schema([

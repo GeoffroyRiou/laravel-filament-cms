@@ -4,10 +4,10 @@ namespace App\Filament\CMSFields;
 
 use Filament\Forms\Components\Builder;
 
-class BlocksField extends Builder
+class PageBuilder extends Builder
 {
     /**
-     * Configure le schéma du formulaire pour le BlocksFields.
+     * Configure le schéma du formulaire pour le PageBuilder.
      *
      * Cette méthode initialise le schéma du formulaire en ajoutant divers composants
      * tels que des champs de texte, des champs de sélection, un éditeur enrichi, des
@@ -31,7 +31,7 @@ class BlocksField extends Builder
     {
         $schemas = [];
         $schemaPath = app_path('Filament/CMSBlocks');
-        
+
         foreach (glob("{$schemaPath}/*.php") as $file) {
             $className = 'App\\Filament\\CMSBlocks\\' . basename($file, '.php');
             if (class_exists($className) && method_exists($className, 'make')) {
@@ -41,5 +41,4 @@ class BlocksField extends Builder
 
         return $schemas;
     }
-
 }

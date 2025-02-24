@@ -9,7 +9,7 @@ class ButtonBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.simple-button')
+        return Block::make('cms-blocks.button')
             ->label('Bouton')
             ->icon('heroicon-o-link')
             ->schema(ComplexButtonSchema::get());

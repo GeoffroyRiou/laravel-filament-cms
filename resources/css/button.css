@@ -1,0 +1,3 @@
+.cms-button {
+    @apply px-4 py-2 bg-sky-500 text-white rounded-md hover:bg-sky-600;
+}

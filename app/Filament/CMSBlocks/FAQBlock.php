@@ -11,7 +11,7 @@ class FAQBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.faq')
+        return Block::make('cms-blocks-blocks.faq')
             ->label('FAQ')
             ->icon('heroicon-o-question-mark-circle')
             ->schema([

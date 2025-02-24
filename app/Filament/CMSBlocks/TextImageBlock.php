@@ -18,7 +18,7 @@ class TextImageBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.text-image')
+        return Block::make('cms-blocks.text-image')
             ->label('Texte avec image d\'illustration')
             ->icon('heroicon-o-rectangle-group')
             ->schema([

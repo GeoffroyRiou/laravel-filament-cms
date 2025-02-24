@@ -14,7 +14,7 @@ class TeamBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.team')
+        return Block::make('cms-blocks.team')
             ->label('Equipe')
             ->icon('heroicon-o-user-group')
             ->schema([

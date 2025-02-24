@@ -3,7 +3,7 @@
 namespace App\Filament\Resources;
 
 use App\Enums\PostsStatus;
-use App\Filament\CMSFields\BlocksField;
+use App\Filament\CMSFields\PageBuilder;
 use App\Filament\Resources\PostResource\Pages;
 use App\Filament\CMSFields\MediaLibraryFileField;
 use App\Models\Post;
@@ -138,7 +138,7 @@ class PostResource extends Resource
                     $hasBuilder ?
                     Section::make('Contenu de la page')
                     ->schema([
-                        BlocksField::make('contenu')
+                        PageBuilder::make('contenu')
                             ->columnSpan(2)
                             ->collapsed()
                             ->collapsible()

@@ -11,7 +11,7 @@ class SliderLogosBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.slider-logos')
+        return Block::make('cms-blocks.slider-logos')
             ->label('Carousel de logos')
             ->icon('heroicon-o-rectangle-stack')
             ->schema([

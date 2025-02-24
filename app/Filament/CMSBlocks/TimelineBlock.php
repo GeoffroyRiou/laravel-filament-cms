@@ -12,7 +12,7 @@ class TimelineBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.timeline')
+        return Block::make('cms-blocks.timeline')
             ->label('Frise chronologique')
             ->icon('heroicon-o-clock')
             ->schema([

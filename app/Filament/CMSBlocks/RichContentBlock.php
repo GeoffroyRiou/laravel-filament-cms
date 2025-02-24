@@ -5,11 +5,11 @@ namespace App\Filament\CMSBlocks;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Builder\Block;
 
-class GenericContentBlock
+class RichContentBlock
 {
     public static function make(): Block
     {
-        return Block::make('cms.generic-content')
+        return Block::make('cms-blocks.rich-content')
             ->label('Contenu éditorial')
             ->icon('heroicon-o-newspaper')
             ->schema([

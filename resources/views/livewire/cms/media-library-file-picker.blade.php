@@ -9,8 +9,7 @@
         </div>
 
         <div class="pagination">
-            {{$mediaFiles->links()}}
+            {{ $mediaFiles->links() }}
         </div>
     </div>
 </div>
-
