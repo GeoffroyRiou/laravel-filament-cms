@@ -1,12 +1,14 @@
-@props(['mediaFile'])
+@props(['mediaFile', 'hideCaption' => false])
 
 <figure {{ $attributes->merge(['class' => 'media-library__card']) }}>
     <div class="preview">
-        @if ($mediaFile->isImage())
-            <img src="{{ $mediaFile->getUrl(150, 150) }}" alt="{{ $mediaFile->name }}" class="thumbnail">
+        @if ($mediaFile->is_image)
+            <img src="{{ $mediaFile->getUrl(100, 100) }}" alt="{{ $mediaFile->name }}" class="thumbnail">
         @else
             @svg('heroicon-o-document')
         @endif
     </div>
-    <span class="caption">{{ $mediaFile->name }}</span>
+    @if (!$hideCaption)
+        <span class="caption">{{ $mediaFile->name }}</span>
+    @endif
 </figure>

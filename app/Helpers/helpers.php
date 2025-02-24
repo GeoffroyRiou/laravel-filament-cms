@@ -252,22 +252,6 @@ function getPostUrl(int $postId): ?string
  *
  * @param  int  $mediaId
  */
-function getMediaFileUrl(MediaLibraryFile|int $media, string $size = 'thumbnail'): ?string
-{
-
-    $media = $media instanceof MediaLibraryFile ? $media : getMediaFile($media);
-
-    if (!$media) {
-        return null;
-    }
-    return $media->getFirstMedia('*')->getUrl($media->isImage() ? $size : null);
-}
-
-/**
- * Retourne l'url d'un media. S'il s'agit d'une image, possibilité de définir sa taille
- *
- * @param  int  $mediaId
- */
 function getMediaFile(int $mediaId): ?MediaLibraryFile
 {
     return  MediaLibraryFile::find($mediaId) ?? null;
@@ -302,18 +286,4 @@ function excerpt(string $text, int $words = 20): string
 function formatDateLocalized(string $date, string $format = 'd/m/Y'): string
 {
     return Carbon\Carbon::parse($date)->translatedFormat($format);
-}
-
-/**
- * Retourne l'url d'une image aux dimensions demandées
- * @param  string  $path  Le chemin de l'image
- * @param  int  $width  La largeur de l'image
- * @param  int  $height  La hauteur de l'image
- * @param  bool  $crop  Indique si l'image doit être recadrée
- * @return string
- **/
-function imageUrl(string $path, int $width = 100, int $height = 100, bool $crop = true): string
-{
-    $imageService = app(ImageService::class);
-    return Storage::url($imageService->getResizedImage($path, $width, $height, $crop));
 }

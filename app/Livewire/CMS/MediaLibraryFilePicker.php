@@ -18,11 +18,11 @@ class MediaLibraryFilePicker extends Component
 
     public bool $filesOnly = false;
 
-    public int | string $perPage = 1;
+    public int | string $perPage = 10;
     
 
     #[Modelable] // Lien avec la propriété wire:model à l'appel du composant
-    public string $mediaFileId = '';
+    public ?string $mediaFileId = '';
 
 
     public function selectMediaFile(string $mediaFileId): void

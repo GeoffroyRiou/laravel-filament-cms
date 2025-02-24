@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Services\ImageService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 
@@ -13,17 +14,33 @@ class MediaLibraryFile extends Model
     protected $fillable = [
         'name',
         'path',
+        'is_image',
     ];
 
-    // TODO : Améliorer
+    protected static function booted()
+    {
+        static::creating(function ($mediaFile) {
+            $mediaFile->is_image = $mediaFile->isImage();
+        });
+
+        static::updating(function ($mediaFile) {
+            $mediaFile->is_image = $mediaFile->isImage();
+        });
+    }
+
     public function isImage(): bool
     {
         $filePath = Storage::disk('public')->path($this->path);
-        return in_array(mime_content_type($filePath), ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/svg+xml']);
+        return in_array(mime_content_type($filePath), config('cms.images.mimeTypes'));
     }
 
-    public function getUrl(): string
+    public function getUrl(int $width = 100, int $height = 100, bool $crop = true): string
     {
-        return imageUrl($this->path);
+        if ($this->is_image) {
+            $imageService = app(ImageService::class);
+            return Storage::url($imageService->getResizedImage($this->path, $width, $height, $crop));
+        }
+
+        return Storage::url($this->path);
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\CMSColumns\MediaLibraryFilePreviewColumn;
 use App\Filament\Resources\MediaLibraryFileResource\Pages;
 use App\Filament\Resources\MediaLibraryFileResource\RelationManagers;
 use App\Models\MediaLibraryFile;
@@ -14,6 +15,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\Layout\Grid;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ViewColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -45,19 +47,12 @@ class MediaLibraryFileResource extends Resource
     {
         return $table
             ->columns([
-                Grid::make()
-                    ->columns(1)
-                    ->schema([
-                        ImageColumn::make('path')
-                            ->label('Image')
-                            ->square(true)
-                            ->height(150),
+                MediaLibraryFilePreviewColumn::make('path'),
                         TextColumn::make('name')
                             ->label('Nom')
                             ->searchable(),
-                    ])
             ])
-            ->contentGrid(['sm' => 2, 'md' => 3, 'lg' => 4])
+            ->contentGrid(['sm' => 2, 'md' => 3,])
             ->filters([
                 //
             ])

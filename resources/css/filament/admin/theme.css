@@ -43,7 +43,7 @@
     border
     rounded-lg
     cursor-pointer
-    min-h-[100px];
+    w-full;
 
     &.-alone{
         @apply
@@ -62,7 +62,7 @@
         flex
         justify-center
         items-center
-        h-36
+        min-h-[160px]
         bg-slate-100
         rounded-lg
         w-full;
@@ -72,6 +72,12 @@
             w-20
             h-20
             opacity-30;
+        }
+
+        > .thumbnail{
+            @apply
+            p-5
+            w-full;
         }
     }
 
