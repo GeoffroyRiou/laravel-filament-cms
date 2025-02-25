@@ -11,7 +11,7 @@ class SliderLogosBlock
 {
     public static function make(): Block
     {
-        return Block::make('ocms::slider-logos')
+        return Block::make('ocms-blocks::slider-logos')
             ->label('Carousel de logos')
             ->icon('heroicon-o-rectangle-stack')
             ->schema([

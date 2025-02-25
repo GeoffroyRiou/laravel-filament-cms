@@ -19,6 +19,7 @@ class OCmsProvider extends ServiceProvider
     public function boot(): void
     {
         Blade::anonymousComponentPath(resource_path('views/ocms/components'), 'ocms');
+        Blade::anonymousComponentPath(resource_path('views/ocms/components/blocks'), 'ocms-blocks');
         Blade::component('ocms::page-builder', PageBuilder::class);
     }
 }

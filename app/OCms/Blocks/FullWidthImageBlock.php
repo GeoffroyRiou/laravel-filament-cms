@@ -10,7 +10,7 @@ class FullWidthImageBlock
 {
     public static function make(): Block
     {
-        return Block::make('ocms::full-width-image')
+        return Block::make('ocms-blocks::full-width-image')
             ->label('Image pleine largeur')
             ->icon('heroicon-o-photo')
             ->schema(ImageSchema::get());

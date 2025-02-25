@@ -9,7 +9,7 @@ class RichContentBlock
 {
     public static function make(): Block
     {
-        return Block::make('ocms::rich-content')
+        return Block::make('ocms-blocks::rich-content')
             ->label('Contenu éditorial')
             ->icon('heroicon-o-newspaper')
             ->schema([

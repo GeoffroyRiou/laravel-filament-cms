@@ -14,7 +14,7 @@ class TeamBlock
 {
     public static function make(): Block
     {
-        return Block::make('ocms::team')
+        return Block::make('ocms-blocks::team')
             ->label('Equipe')
             ->icon('heroicon-o-user-group')
             ->schema([
