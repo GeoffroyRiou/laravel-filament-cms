@@ -48,7 +48,7 @@ class MediaLibraryFilePicker extends Component
     public function render()
     {
 
-        return view('livewire.cms.media-library-file-picker', [
+        return view('ocms.components.livewire.medialibrary.file-picker', [
             'mediaFiles' => $this->getMediaFiles()
         ]);
     }
