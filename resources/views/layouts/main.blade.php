@@ -11,14 +11,8 @@
 </head>
 
 <body>
-    <x-front.header :currentPost="$post ?? null" />
 
     @yield('content')
-
-    <x-front.footer />
-
-    <x-gtag />
-    <x-matomo />
 
     @vite(['resources/js/app.js'])
 </body>

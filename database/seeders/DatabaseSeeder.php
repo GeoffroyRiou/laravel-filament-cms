@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Enums\PostsStatus;
-use App\Enums\UserRoles;
-use App\Models\Accueil;
-use App\Models\ContactForm;
-use App\Models\Settings;
+use App\OCms\Enums\PostsStatus;
+use App\OCms\Enums\UserRoles;
+use App\OCms\Models\Accueil;
+use App\OCms\Models\ContactForm;
+use App\OCms\Models\Settings;
 use App\Models\User;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -34,6 +34,5 @@ class DatabaseSeeder extends Seeder
             'adresse' => '',
             'email' => '',
         ]);
-
     }
 }

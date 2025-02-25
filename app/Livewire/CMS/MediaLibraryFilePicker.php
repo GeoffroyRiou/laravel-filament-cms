@@ -2,7 +2,7 @@
 
 namespace App\Livewire\CMS;
 
-use App\Models\MediaLibraryFile;
+use App\OCms\Models\MediaLibraryFile;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Livewire\Attributes\Modelable;
 use Livewire\Component;
@@ -19,7 +19,7 @@ class MediaLibraryFilePicker extends Component
     public bool $filesOnly = false;
 
     public int | string $perPage = 10;
-    
+
 
     #[Modelable] // Lien avec la propriété wire:model à l'appel du composant
     public ?string $mediaFileId = '';

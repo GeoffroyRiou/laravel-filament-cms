@@ -2,9 +2,9 @@
 
 namespace App\Livewire;
 
-use App\Mail\ContactFormMail;
-use App\Models\ContactForm as ContactFormModel;
-use App\Models\ContactFormEntry;
+use App\OCms\Mail\ContactFormMail;
+use App\OCms\Models\ContactForm as ContactFormModel;
+use App\OCms\Models\ContactFormEntry;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
 use Livewire\WithFileUploads;

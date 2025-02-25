@@ -1,16 +1,16 @@
 <?php
 
-use App\Http\Controllers\CMS\CategorieController;
-use App\Http\Controllers\CMS\PostController;
+use App\OCms\Controllers\CategorieController;
+use App\OCms\Controllers\PostController;
 use App\Http\Controllers\Controller;
-use App\Models\Accueil;
-use App\Models\Categorie;
-use App\Models\MediaLibraryFile;
-use App\Models\Menu;
-use App\Models\Post;
-use App\Models\Scopes\CategorieScope;
-use App\Models\Scopes\PostScope;
-use App\Services\ImageService;
+use App\OCms\Models\Accueil;
+use App\OCms\Models\Categorie;
+use App\OCms\Models\MediaLibraryFile;
+use App\OCms\Models\Menu;
+use App\OCms\Models\Post;
+use App\OCms\Models\Scopes\CategorieScope;
+use App\OCms\Models\Scopes\PostScope;
+use OCms\Services\ImageService;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -23,12 +23,12 @@ function getCmsControllersClasses(): array
 {
 
     $filesystem = new Filesystem();
-    $files = $filesystem->files(app_path('Http/Controllers/CMS'));
+    $files = $filesystem->files(app_path('OCms/Controllers'));
 
     $controllers = [];
 
     foreach ($files as $file) {
-        $class = 'App\Http\Controllers\CMS\\' . $filesystem->name($file);
+        $class = 'App\OCms\Controllers\\' . $filesystem->name($file);
         $reflection = new ReflectionClass($class);
 
         if ($reflection->isSubclassOf(Controller::class) && (
@@ -50,7 +50,7 @@ function getCmsControllersClasses(): array
  */
 function getViewNameFromSlug(string $search, string $path = null): string | null
 {
-    $viewsPath = resource_path('views/pages');
+    $viewsPath = resource_path('views/ocms/pages');
     $path = $path ?? $viewsPath;
 
     $filesystem = new \Illuminate\Filesystem\Filesystem();

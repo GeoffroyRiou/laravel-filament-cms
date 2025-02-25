@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CMS\HomeController;
+use App\OCms\Controllers\HomeController;
 use App\Http\Controllers\Front\DocumentPriveController;
 use App\Http\Controllers\Front\LoginController;
 use App\Http\Controllers\LanguageSwitcher;

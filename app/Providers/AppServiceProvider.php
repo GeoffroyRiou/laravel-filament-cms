@@ -2,9 +2,9 @@
 
 namespace App\Providers;
 
-use App\Models\Page;
-use App\Models\Post;
-use App\Models\Settings;
+use App\OCms\Models\Page;
+use App\OCms\Models\Post;
+use App\OCms\Models\Settings;
 use Barryvdh\Debugbar\Facades\Debugbar;
 use Filament\Support\Assets\Css;
 use Filament\Support\Facades\FilamentAsset;

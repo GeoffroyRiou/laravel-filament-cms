@@ -2,7 +2,7 @@
 
 namespace App\Providers\Filament;
 
-use App\Models\Accueil;
+use App\OCms\Models\Accueil;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -40,7 +40,9 @@ class AdminPanelProvider extends PanelProvider
                 ])
                 ->viteTheme('resources/css/filament/admin/theme.css')
                 ->discoverResources(in: app_path('Filament/Resources'), for: 'App\\Filament\\Resources')
+                ->discoverResources(in: app_path('OCms/Resources'), for: 'App\\OCms\\Resources')
                 ->discoverPages(in: app_path('Filament/Pages'), for: 'App\\Filament\\Pages')
+                ->discoverPages(in: app_path('OCms/Pages'), for: 'App\\OCms\\Pages')
                 ->pages([
                     Pages\Dashboard::class,
                 ])

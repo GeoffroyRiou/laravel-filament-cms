@@ -1,8 +1,8 @@
 <?php
 
-use App\Enums\PostsStatus;
-use App\Models\Categorie;
-use App\Models\MediaLibraryFile;
+use App\OCms\Enums\PostsStatus;
+use App\OCms\Models\Categorie;
+use App\OCms\Models\MediaLibraryFile;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;

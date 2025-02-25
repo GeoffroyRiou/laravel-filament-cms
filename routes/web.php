@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CMS\HomeController;
+use App\OCms\Controllers\HomeController;
 use App\Http\Controllers\LanguageSwitcher;
 use Illuminate\Support\Facades\Route;
 
