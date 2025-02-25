@@ -7,7 +7,7 @@
             @php($mediaFile = $getMediaFile())
             @if ($mediaFile)
                 <div style="width: fit-content">
-                    <x-medialibrary.admin-preview :mediaFile="$mediaFile" class="-alone" />
+                    <x-ocms::fields.medialibrary.preview :mediaFile="$mediaFile" class="-alone" />
                 </div>
             @endif
         </div>

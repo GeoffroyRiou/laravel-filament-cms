@@ -12,7 +12,7 @@ use Filament\Forms\Set;
 
 class MediaLibraryFileField extends Field
 {
-    protected string $view = 'cms.fields.media-library-file-field';
+    protected string $view = 'ocms.components.fields.medialibrary.file-field';
 
     public bool $imagesOnly = false;
 

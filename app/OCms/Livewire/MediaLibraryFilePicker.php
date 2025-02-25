@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\CMS;
+namespace App\OCms\Livewire;
 
 use App\OCms\Models\MediaLibraryFile;
 use Illuminate\Pagination\LengthAwarePaginator;

@@ -3,7 +3,7 @@
     <div class="media-library__list">
         <div class="list">
             @foreach ($mediaFiles as $mediaFile)
-                <x-medialibrary.admin-preview :mediaFile="$mediaFile" wire:click="selectMediaFile({{ $mediaFile->id }})"
+                <x-ocms::medialibrary.preview :mediaFile="$mediaFile" wire:click="selectMediaFile({{ $mediaFile->id }})"
                     class="media-library__card {{ $mediaFileId == $mediaFile->id ? '-active' : '' }}" />
             @endforeach
         </div>
