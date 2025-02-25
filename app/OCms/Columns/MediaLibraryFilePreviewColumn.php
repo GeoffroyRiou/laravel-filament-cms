@@ -6,5 +6,5 @@ use Filament\Tables\Columns\Column;
 
 class MediaLibraryFilePreviewColumn extends Column
 {
-    protected string $view = 'cms.columns.media-library-file-preview-column';
+    protected string $view = 'ocms.components.columns.medialibrary.file-preview';
 }

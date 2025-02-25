@@ -10,7 +10,7 @@ use App\OCms\Models\Menu;
 use App\OCms\Models\Post;
 use App\OCms\Models\Scopes\CategorieScope;
 use App\OCms\Models\Scopes\PostScope;
-use OCms\Services\ImageService;
+use App\OCms\Services\ImageService;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

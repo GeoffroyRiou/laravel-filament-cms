@@ -2,7 +2,7 @@
 
 namespace App\OCms\Models;
 
-use OCms\Services\ImageService;
+use App\OCms\Services\ImageService;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace OCms\Services;
+namespace App\OCms\Services;
 
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\ImageManager;

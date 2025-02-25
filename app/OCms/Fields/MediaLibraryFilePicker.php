@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Collection;
 
 class MediaLibraryFilePicker extends Field
 {
-    protected string $view = 'cms.fields.media-library-file-picker';
+    protected string $view = 'ocms.components.fields.medialibrary.file-picker';
 
     public bool $imagesOnly = false;
 
